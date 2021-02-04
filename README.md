@@ -1,6 +1,7 @@
 # 5G기반 스마트웰니스 의료기기 인공지능 로봇틱스 in HKIT
 Introduce a project that applied H/W and S/W.
 ***
+![project](https://user-images.githubusercontent.com/74335601/106933859-c1bd6880-675c-11eb-926b-f8c32f3018c6.png)
 
 ## Contents
 #### _C++ Programming for H/W control_
