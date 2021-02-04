@@ -3,14 +3,14 @@ Introduce a project that applied H/W and S/W.
 ***
 
 ## Contents
-###### * _C++ Programming for H/W control_
+#### * _C++ Programming for H/W control_
   + Period: August 12th, 2020 ~ September 2nd, 2020
   + C++ & openCV(26/8/2020 ~ 28/8/2020)
     - C++: Visual Studio Community 2019
     - openCV: 4.3.0
   + book : Accelerated C++ (Hanbit)
   
-* _Python + Big-data_
+##### * _Python + Big-data_
   + Period: September 3rd, 2020 ~ September 16th, 2020
   + Python3 + Numpy + Pandas
     - Python3: 3.8.5
