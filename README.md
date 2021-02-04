@@ -3,7 +3,7 @@ Introduce a project that applied H/W and S/W.
 ***
 
 ## Contents
-* _C++ Programming for H/W control_
+###### * _C++ Programming for H/W control_
   + Period: August 12th, 2020 ~ September 2nd, 2020
   + C++ & openCV(26/8/2020 ~ 28/8/2020)
     - C++: Visual Studio Community 2019
@@ -44,7 +44,7 @@ Introduce a project that applied H/W and S/W.
     - Project period: 14 days
     - Jobs in team: Development(Python3 IDE + RPi.GPIO module), Make PPT, Make application(intro)
     
-* Deeplearning, openCV(Computer vision), yolov3
+* _Deeplearning, openCV(Computer vision), yolov3_
   + Period: November 25th, 2020 ~ December 28th, 2020
   + deep learning basic, machine vision(Dec 10 ~ Dec 21), yolov3(Dec 22 ~ Dec 28)
     - Perceptron, Adaline, SGD (Scikit-learn) / Tensorflow 2.0 / Backpropagation (Math - Partial derivate) + CNN
@@ -54,14 +54,14 @@ Introduce a project that applied H/W and S/W.
     - Project period: 4 days
     - Jobs in team: Fit model(Google colaboratory), Make PPT
     
-* Manage & Work to smart-wellness public-works project
+* _Manage & Work to smart-wellness public-works project_
   + period: Jan 4th, 2021 ~ Jan 8th, 2021
   + Write report, proposal, plan (Assumption: Startup company / 4 people)
     - Draw lean canvas
     - Write business plan
     - Brain-storming (10 smart-wellness ideas)
 
-* MongoDB
+* _MongoDB_
   + period: Jan 14th, 2021 ~ Feb 1st, 2021
   + System Link among MongoDB, MongoDB Atlas, Studio 3T, < Pycharm(python 3.9.1), pymongo >
     - Data GRUD 
