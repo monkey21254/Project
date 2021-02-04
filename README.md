@@ -3,7 +3,7 @@ Introduce a project that applied H/W and S/W.
 ***
 
 ## Contents
-#### * _C++ Programming for H/W control_
+#### _C++ Programming for H/W control_
   + Period: August 12th, 2020 ~ September 2nd, 2020
   + C++ & openCV(26/8/2020 ~ 28/8/2020)
     - C++: Visual Studio Community 2019
