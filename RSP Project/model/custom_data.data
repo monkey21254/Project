@@ -1,0 +1,5 @@
+classes = 3
+train = /content/drive/MyDrive/darknet/model/train.txt
+valid = /content/drive/MyDrive/darknet/model/test.txt
+names = /content/drive/MyDrive/darknet/model/classes.names
+backup = backup

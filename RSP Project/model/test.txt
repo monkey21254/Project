@@ -1,0 +1,2 @@
+/content/drive/MyDrive/darknet/data/game001.jpg
+/content/drive/MyDrive/darknet/data/game011.jpg
