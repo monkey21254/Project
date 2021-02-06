@@ -4,21 +4,22 @@
 - 참여인원: 3명 (김기영, 옥진해, 전고은)
 - 역할:
 - 프로젝트 세부내용
-    - 가위, 바위, 보 이미지의 직접적인 Labeling을 통한 이미지 데이터 학습
-    - 학습 결과을 이용한 Webcam으로 가위바위보 판정
-        - 1인일 경우 : 가위, 바위, 보 3가지 중 어떤 것인지 출력
-        - 2인 이상일 경우 : 가위, 바위, 보 3가지 중 어떤 것인지 출력, 승패 확인
+    - 가위, 바위, 보 이미지를 LabelImg 프로그램을 통해 분류
+    - 분류된 이미지의 weights 파일을 기반으로 yolov3 학습 수행
+    - 학습이 완료된 모델을 활용, Webcam으로 가위바위보 판정
+        - 1인: 가위, 바위, 보 3가지 중 어떤 것인지 출력
+        - 2인 이상: 가위, 바위, 보 3가지 중 어떤 것인지 출력, 승패 확인
 - 사용언어 및 버전 : Python 3.9.1
-- 사용툴: Vscode, Google Colab
+- 사용툴: VS Code, Google Colab
 - 라이브러리
     - Numpy 1.18.5
     - OpenCV 4.3.0
-    - Yolo v3
+    - YOLOv3
 
 ## Files
 ### GameCustomYolo.ipynb
-    Yolo을 이용하여 이미지 데이터 학습을 할 수 있는 과정이 있습니다.
-    이번 학습은 Google Colab에서 이루어졌습니다.
+    yolo을 이용하여 이미지 데이터 학습을 할 수 있는 과정이 있습니다.
+    학습은 Google Colab에서 이루어졌습니다.
 
 ### yolo_custom_RSP_video.py
     OpenCV(DNN), Yolo v3(Darknet), Webcam을 활용하여 학습된 가위바위보 모델을 검증하여 출력해주는 코드입니다.
