@@ -50,3 +50,6 @@
 [YOLO를 통한 가위바위보 학습 - 1인의 경우](https://youtu.be/Efdvvv-RvF0)  
 [YOLO를 통한 가위바위보 학습 - 2인의 경우](https://youtu.be/x7iqZd_DmKQ)  
 [YOLO를 통한 가위바위보 학습 - 3인 이상의 경우](https://youtu.be/87-4rrAkaCc)  
+
+### PPT(PDF)   
+[RSP 최종본](D:/hkit/프로젝트/RSP Project/가위바위보정.pptx)
