@@ -53,4 +53,3 @@
 
 ### PPT(PDF)   
 [RSP_최종본](https://github.com/monkey21254/Project/files/5967449/RSP_summary.PDF)   
-test   
