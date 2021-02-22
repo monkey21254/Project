@@ -1,0 +1,15 @@
+    package                    |            build
+    ---------------------------|-----------------
+    cudatoolkit-11.0.221       |       h74a9793_0       627.0 MB
+    libuv-1.40.0               |       he774522_0         255 KB
+    lz4-c-1.9.3                |       h2bbff1b_0         131 KB
+    mkl_fft-1.2.1              |   py38h46781fe_0         120 KB
+    ninja-1.10.2               |   py38h6d14046_0         247 KB
+    openssl-1.1.1j             |       h2bbff1b_0         4.8 MB
+    pillow-8.1.0               |   py38h4fa10fc_0         664 KB
+    pip-21.0.1                 |   py38haa95532_0         1.8 MB
+    pytorch-1.7.1              |py3.8_cuda110_cudnn8_0      1007.0 MB  pytorch
+    torchvision-0.8.2          |       py38_cu110         7.3 MB  pytorch
+    typing_extensions-3.7.4.3  |     pyha847dfd_0          25 KB
+    ------------------------------------------------------------
+                                           Total:        1.61 GB
