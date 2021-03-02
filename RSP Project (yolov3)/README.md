@@ -52,4 +52,10 @@
 [YOLO를 통한 가위바위보 학습 - 3인 이상의 경우](https://youtu.be/87-4rrAkaCc)  
 
 ### PPT(PDF)   
-[RSP_최종본](https://github.com/monkey21254/Project/files/5967449/RSP_summary.PDF)   
++ 바로가기
+(https://github.com/monkey21254/Project/blob/main/RSP%20Project%20(yolov3)/RSP_summary.PDF)
++ 다운로드
+(https://github.com/monkey21254/Project/files/5967449/RSP_summary.PDF)   
+
+### Image
+![RSP](https://user-images.githubusercontent.com/74335601/109662606-95a3d480-7bae-11eb-83fb-763c68357717.png)
