@@ -1,6 +1,6 @@
 # Kaggle (VinBigData Chest abnormalities detection) Project
 
-> Project Team. 자세한 설명 및 코드. <https://github.com/X-Ray-Project/main>
+> Project Team (자세한 설명 및 코드 포함) <https://github.com/X-Ray-Project/main>
 ***
 
 < 프로젝트 (1차 목표 기간) 종료 >
