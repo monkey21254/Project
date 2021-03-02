@@ -25,4 +25,7 @@
 	- 자동차 구동에서의 핵심 컨셉인 초음파 센서를 작동시키기 위한 코드 파일
 
 ### PPT(PDF)
-[Sensor Vehicle 최종.pdf](https://github.com/monkey21254/Project/files/6019006/Sensor.Vehicle.pdf)
++ 바로가기
+(https://github.com/monkey21254/Project/blob/main/Sensor%20vehicle%20Project/Sensor.Vehicle.pdf)
++ 다운로드
+(https://github.com/monkey21254/Project/files/6019006/Sensor.Vehicle.pdf)
