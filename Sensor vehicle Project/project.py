@@ -171,15 +171,3 @@ while True:
         carDirFor()
           
     #print(Fsensor > 100)
-    
-    
-
-    
-    
-    
-
-
-
-
-
-
