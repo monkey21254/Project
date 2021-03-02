@@ -44,3 +44,6 @@
 (https://github.com/monkey21254/Project/blob/main/Automic%20Car%20Project/Automic.Car.pdf)    
 + 다운로드
 (https://github.com/monkey21254/Project/files/6018952/Automic.Car.pdf)
+
+### Image
+![automic](https://user-images.githubusercontent.com/74335601/109662206-262de500-7bae-11eb-869d-3c453b8371b7.png)
