@@ -70,3 +70,12 @@ Introduce a project that applied H/W and S/W.
     - Data GRUD 
   + HTML, CSS, Flask, Web-crawling, OpenWeatherMap(Google)
     - Bootstrap
+
+#### _Kaggle X_ray Proejct_
+  + 1st period: Feb 8th, 2021 ~ Feb 26th, 2021
+  + Environment: Python(3.9.1), Jupyter Notebook, Google Colab(CUDA 11.2), Kaggle Notebook(CUDA 11.2)
+  + Project Manage Tools: Github(git-bash), Trello
+  + Role
+    1. Trello: Overall announcement and team member schedule management (전체 공지 및 팀원 일정 관리)
+    2. Data Analysis: X-ray data EDA, Y-Label(total 14 classes) analysis(medical info), Model search(CutMix, MMDetection, DetectoRS_ResNet) (데이터 EDA, 분류 클래스 분석(의학지식 필요, X-ray anatomy 조사, 모델 탐구(CutMix, MMDetection, DetectoRS_ResNet)
+    3. PPT: Manage total ppt data, make overall layout, summary and modify all of that. (PPT 전체 관리 및 전반적인 레이아웃 제작 & 요약 및 수정)
