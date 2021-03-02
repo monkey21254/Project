@@ -1,4 +1,4 @@
-# Raspberry pi 4 & Android Studio를 활용한 수동, 반자동 자동차 제작
+# Raspberry pi 4 & Android Studio를 활용한 수동(반자동) 자동차 및 어플리케이션 제작
 - 프로젝트명: Automic
 - 참여기간: 2020.10.28 ~ 2020.11.25
 - 참여인원: 3명 (김기영, 김채진, 서강원, 옥진해, 전고은)
