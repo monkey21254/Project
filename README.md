@@ -2,6 +2,7 @@
 Introduce a project that applied H/W and S/W.
 > Blog except project contents. <https://monkey2125.tistory.com>
 ***
+![trello](https://user-images.githubusercontent.com/74335601/109652109-b403d300-7ba2-11eb-9ddf-b7bae828ed4a.png)
 ![project](https://user-images.githubusercontent.com/74335601/106933859-c1bd6880-675c-11eb-926b-f8c32f3018c6.png)
 
 ## Contents
