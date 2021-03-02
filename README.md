@@ -77,5 +77,6 @@ Introduce a project that applied H/W and S/W.
     2. Data Analysis: X-ray data EDA, Y-Label(total 14 classes) analysis(medical info), Model search(CutMix, MMDetection, DetectoRS_ResNet) (데이터 EDA, 분류 클래스 분석(의학지식 필요, X-ray anatomy 조사, 모델 탐구(CutMix, MMDetection, DetectoRS_ResNet)
     3. PPT: Manage total ppt data, make overall layout, summary and modify all of that. (PPT 전체 관리 및 전반적인 레이아웃 제작, 요약, 수정)
 
+### Image
 ![trello](https://user-images.githubusercontent.com/74335601/109652109-b403d300-7ba2-11eb-9ddf-b7bae828ed4a.png)
 ![project](https://user-images.githubusercontent.com/74335601/106933859-c1bd6880-675c-11eb-926b-f8c32f3018c6.png)
