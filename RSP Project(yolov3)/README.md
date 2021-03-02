@@ -1,4 +1,4 @@
-# YOLOv3를 활용한 Object Detection 가위바위보 판정 프로그램
+# YOLOv3를 활용한 Object Detection - 가위바위보 판정 프로그램
 - 프로젝트명: RSP (Rock Scissors Paper)
 - 참여기간: 2020.12.28 ~ 2020.12.31 (4일)
 - 참여인원: 3명 (김기영, 옥진해, 전고은)
