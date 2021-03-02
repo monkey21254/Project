@@ -1,7 +1,7 @@
 ## Contents
 ### Repository 
 #### 1. Level2
-+ 기본적인 Package 환경설정이 되어 있는 _**"__init__.py"**_
++ 기본적인 Package 환경설정이 되어 있는 _***"__init__.py"***_
 + Variable 및 Function 클래스가 정의되어 있는 _core_simple.py_
 	- 내부에 연산자 오버로딩, 매직 메소드, contextlib, 데코레이터, 메모리체크 모듈(memory_profiler) 등 기재
 + _210302(Level 2).ipynb_ : 교재를 보고 따라하면서 작성했던 Jupyter Notebook 포맷 파일
