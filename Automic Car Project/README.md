@@ -40,5 +40,5 @@
 	- 교차로 카운팅 및 좌우 판별하여 자동 운행
 
 ### PPT(PDF)
-[Automic Car 최종.pdf 바로가기](https://github.com/monkey21254/Project/blob/main/Automic%20Car%20Project/Automic.Car.pdf)    
-[Automic Car 최종.pdf [Download]](https://github.com/monkey21254/Project/files/6018952/Automic.Car.pdf)
+	+[Automic Car 최종.pdf 바로가기](https://github.com/monkey21254/Project/blob/main/Automic%20Car%20Project/Automic.Car.pdf)    
+	+[Automic Car 최종.pdf [Download]](https://github.com/monkey21254/Project/files/6018952/Automic.Car.pdf)
