@@ -9,11 +9,17 @@
 < 개인 별 프로젝트 모델 갱신 >
 - Period: Mar 2, 2021 ~ Mar 31, 2021
 
-### Image
-![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
+### Paper analysis
++ 바로가기
+(https://github.com/monkey21254/Project/blob/main/Kaggle%20Project/MMDetection%20%26%20DetectoRS%20Paper.pdf)
++ 다운로드
+(https://github.com/monkey21254/Project/files/6072739/MMDetection.DetectoRS.Paper.pdf)
 
 ### PDF
 + 바로가기
 (https://github.com/monkey21254/Project/blob/main/Kaggle%20Project/PPT._210226.pdf)
 + 다운로드
 (https://github.com/X-Ray-Project/main/files/6047463/PPT._210226.pdf)
+
+### Image
+![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
