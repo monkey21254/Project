@@ -1,5 +1,5 @@
 
-#### Homepage Main (이미지 블로그 링크 (https://monkey2125.tistory.com/264)
+#### Homepage Main - 이미지 블로그 링크 (https://monkey2125.tistory.com/264
 ![homepage](https://user-images.githubusercontent.com/74335601/109770069-6c328980-7c3e-11eb-8b65-100e64bbc27e.png)
 
 # MongoDB를 활용한 Database 구축 및 홈페이지 서버 관리
