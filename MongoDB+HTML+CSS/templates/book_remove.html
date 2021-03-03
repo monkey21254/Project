@@ -1,0 +1,16 @@
+{#<!DOCTYPE html>#}
+{#<html lang="ko">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>삭제 결과 화면</title>#}
+{#</head>#}
+{#<body>#}
+{#    서적 삭제 결과:#}
+{#    ! {{ book_remove_result }} !#}
+{#</body>#}
+{#</html>#}
+
+{% extends "layout.html" %}
+{% block contents %}
+    <h1> {{ book_remove_result }} </h1>
+{% endblock %}

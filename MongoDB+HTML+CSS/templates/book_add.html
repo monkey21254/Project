@@ -1,0 +1,76 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서적 등록</title>
+</head>
+<body>
+-->
+<!--
+ form: 검색 내용을 보내야하므로 필요함
+ action: 보낼 주소
+ method: 전달 방식
+ enctype: 파일 업로드 시 필요
+-->
+{% extends "layout.html" %}
+{% block contents %}
+
+<!--
+<form action="/book_add_process" method="post" enctype="multipart/form-data">
+{#    <table width="300px" border="1" bordercolor="red">#}
+    <div style="margin: 5px; color: darkred">
+        <h5>도서 등록</h5>
+    </div>
+    <table border="1" bordercolor="red" class="table table-hover">
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="title"></td>
+        </tr>
+        <tr>
+            <td>표지</td>
+            <td><input type="file" name="file"></td>
+        </tr>
+        <tr>
+            <td>저자</td>
+            <td><input type="text" name="author"></td>
+        </tr>
+        <tr>
+            <td>가격</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td>ISBN</td>
+            <td><input type="text" name="isbn"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="등 록">
+            </td>
+        </tr>
+    </table>
+</form>
+-->
+
+<form action="/book_add_process" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="도서 제목 입력">
+      <label for="image">표지</label>
+      <input type="file" class="form-control" id="image" name="file">
+      <label for="author">저자</label>
+      <input type="text" class="form-control" id="author" name="author">
+      <label for="price">가격</label>
+      <input type="text" class="form-control" id="price" name="price">
+      <label for="isbn">ISBN</label>
+      <input type="text" class="form-control" id="isbn" name="isbn" placeholder="도서 고유 번호">
+      <button type="submit" name="button" style="margin-top: 5px" class="btn btn-dark">
+          등 록 </button>
+  </div>
+</form>
+
+{% endblock %}
+<!--
+</body>
+</html>
+-->

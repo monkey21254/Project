@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block contents %}
+
+<form action="/book_search_process" method="post">
+
+    {% for cur in cursor_list %}
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-action list-group-item-info">
+            <form >
+                  <div class="row">
+                    <div class="col-sm-4"></div>
+                      <div class="col-sm-4">
+                          <form >
+                              <div class="card" >
+                                {% if cur.encoded_data != "None" %}
+                                    <img width="100%" height="100%"
+                                         src="data:image/jpg;base64, {{ cur.encoded_data.decode('utf-8') }}" class="card-img-top">
+                                {% else %}
+                                    <img width="100%" height="100%"
+                                         src="/static/images/error.jpg"; class="card-img-top">
+                                {% endif %}
+                                <div class="card-body">
+                                    <p class="card-text">TITLE: {{ cur.title }}</p>
+                                    <p class="card-text">AUTHOR: {{ cur.author }}</p>
+                                    <p class="card-text">PRICE: {{ cur.price }}</p>
+                                    <p class="card-text">ISBN: {{ cur._id }}</p>
+                                </div>
+                            </div>
+                        </form>
+                      </div>
+                    <div class="col-sm-4"></div>
+                  </div>
+            </form>
+        </li>
+    </ul>
+    {% endfor %}
+
+</form>
+
+{% endblock %}
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서적 검색(id) 결과</title>
+</head>
+<body>
+<form action="/book_add_process" method="post" enctype="multipart/form-data">
+    <table width="300px" border="1" bordercolor="red">
+        <tr>
+            <td>제목</td>
+            <td>{{ title }}</td>
+        </tr>
+        <tr>
+            <td>표지</td>
+            <td>
+                <img width="300px" height="300px" src="{{ img_src_data }}">
+            </td>
+        </tr>
+        <tr>
+            <td>저자</td>
+            <td>{{ author }}</td>
+        </tr>
+        <tr>
+            <td>가격</td>
+            <td>{{ price }}</td>
+        </tr>
+        <tr>
+            <td>ISBN</td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

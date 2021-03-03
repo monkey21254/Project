@@ -1,0 +1,60 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서적 목록</title>
+</head>
+<body>
+-->
+{% extends "layout.html" %}
+{% block contents %}
+
+    <h3>서적 목록</h3>
+    <div style="width: 100%">
+        <div style="width: 100%; text-align: right">
+            {{ count }}건 검색됨
+        </div>
+        <!-- bootstrap: table-hover 추가 -->
+        <!-- <table border="1" bordercolor="blue" class="table table-hover"> -->
+        <table style="width:100%; margin:auto; text-align:center;"
+                class="table table-hover table-success table-striped">
+            <tr>
+                <td>제목</td>
+                <td>표지</td>
+                <td>저자</td>
+                <td>가격</td>
+                <td>ISBN</td>
+                <td>등록일자</td>
+
+                <td>etc</td>
+            </tr>
+            {% for cur in book %}
+            <tr>
+                <td><a href="/book_details/{{ cur._id }}"> {{ cur.title }}</a></td>
+                {% if cur.encoded_data != None %}
+                    <td><img width="50px" height="50px" src={{ cur.encoded_data }}></td>
+                {% else %}
+                    <td width="50px" height="50px"></td>
+                {% endif %}
+                <td>{{ cur.author }}</td>
+                <td>{{ cur.price }}</td>
+                <td>{{ cur._id }}</td>
+                <td></td>
+                <td>
+                    <a href="/book_edit/{{ cur._id }}">
+                        <input type="button" value="수정" class="btn btn-outline-dark"></a>
+                    <a href="/book_remove/{{ cur._id }}">
+                        <input type="button" value="삭제" class="btn btn-outline-danger"></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
+
+<!--
+</body>
+</html>
+-->

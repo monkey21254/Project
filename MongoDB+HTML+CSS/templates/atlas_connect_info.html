@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block contents %}
+
+<form action="/atlas_connect_info_update" method="post">
+    <div class="custom-control custom-radio">
+      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="radio1" checked>
+      <label class="custom-control-label" for="customRadio1">Atlas 접속 정보</label>
+        <div class="form-group">
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            name="atlas_data" value="{{ login_info }}">
+            <small id="emailHelp" class="form-text text-muted">암호화가 필요한 정보입니다.</small>
+        </div>
+    </div>
+    <div class="custom-control custom-radio">
+      <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="radio2">
+      <label class="custom-control-label" for="customRadio2">로컬 접속 문자열</label>
+        <div class="form-group2">
+            <label for="exampleInputEmail2">
+                Host
+                <input type="text" class="form-control2" id="exampleInputEmail2" aria-describedby="emailHelp"
+            name="local_data1" value={{ value1 }}>
+                <div style="margin-top: 3px"></div>
+                Port
+                <input type="text" class="form-control3" id="exampleInputEmail2" aria-describedby="emailHelp"
+            name="local_data2" value={{ value2 }}>
+            </label>
+        </div>
+    </div>
+
+  <button type="submit" class="btn btn-info">제출(수정)</button>
+</form>
+
+{% endblock %}

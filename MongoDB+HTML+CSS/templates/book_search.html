@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block contents %}
+
+<form action="/book_search_process" method="post">
+
+    <!-- name: 검색 아이템(JavaScript 전용) == id  // name 과 id는 똑같은 값을 주는 것이 좋다. -->
+    <!-- radio button, check button 도 동일한 유형 -->
+    <select class="custom_select"
+            style="width: 100px"
+            name="item_to_search"
+            id="item_to_search">
+        <option value="id">ID</option>
+        <option value="title">TITLE</option>
+        <option value="author">AUTHOR</option>
+        <option value="price">PRICE</option>
+        <option value="isbn">ISBN</option>
+    </select>
+
+    <input type="text" name="data_to_search">
+    <input type="submit" value="검 색">
+
+</form>
+
+{% endblock %}

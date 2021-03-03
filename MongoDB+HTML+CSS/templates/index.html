@@ -1,0 +1,40 @@
+{% extends "layout.html" %} <!-- 상속받겠다 -->
+
+{% block contents %}
+    <!-- bootstrap 에서 가운데로 가게 함 classes="container" -->
+    <!--
+    <div classes="container">
+        <h1> Welcome {{ name }} </h1>
+    </div>
+    -->
+    <p class="lead" style="text-align: right">
+        <div style="text-align: right">
+            {{ city }}: {{ temp }}&deg
+        </div>
+        <div style="text-align: right">
+            <img src="http://openweathermap.org/img/wn/{{ icon }}@2x.png" style="width: 50px; height: 50px">
+        </div>
+        <div style="text-align: right">
+            {{ description }}
+        </div>
+    </p>
+
+    {{ message }}
+    <div class="jumbotron">
+      <h1 class="display-4">
+          <div class="alert alert-primary">
+              MongoDB {{ name }}
+          </div>
+      </h1>
+      <hr class="my-4">
+{#      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>#}
+{#      <a class="btn btn-outline-secondary" href="#" role="button">Learn more</a>#}
+        <ul style="margin-top: 5px">
+            <div class="alert alert-dark" role="alert">
+                Flask 기반의 MongoDB 관리 시스템입니다.
+            </div>
+            <li style="margin-top: 5px"> 서적 데이터를 누적, 수정, 삭제 </li>
+            <li style="margin-top: 5px"> 별첨으로 연도별 띠 확인, 화투 게임(vs Computer) </li>
+        </ul>
+    </div>
+{% endblock %}

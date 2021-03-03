@@ -1,0 +1,1 @@
+atlas=mongodb+srv://Kim_Samuel:{password}@kim-cluster.o1ydn.mongodb.net/bookstore?retryWrites=true&w=majority

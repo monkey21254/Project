@@ -1,0 +1,31 @@
+{#<!DOCTYPE html>#}
+{#<html lang="ko">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>화 투</title>#}
+{#</head>#}
+{#<body>#}
+
+{% extends "layout.html" %}
+{% block contents %}
+
+<table>
+    <tr><td>
+        {% for item in shuffled_card %}
+            <img src="static/images2/{{ item }}.jpg">
+        {% endfor %}
+    </td></tr>
+    <tr><td>
+        {% for item in shuffled_card2 %}
+            <img src="static/images2/{{ item }}.jpg">
+        {% endfor %}
+    </td></tr>
+    <tr><td>
+        {{ game_result }} !!!
+    </td></tr>
+</table>
+
+{% endblock %}
+
+{#</body>#}
+{#</html>#}

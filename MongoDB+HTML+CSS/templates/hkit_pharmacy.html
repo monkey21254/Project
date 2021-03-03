@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block contents %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div id="map" style="width: 800px; height: 800px">
+
+    </div>
+
+<script>
+    function initMap() {
+        const myLatLng = { lat: 35.88107, lng: 128.62707 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: myLatLng,
+        });
+        {% for item in pharmacy %}
+            new google.maps.Marker({
+                position: { lat: {{ item.location.coordinates[1] }}, lng: {{ item.location.coordinates[0] }}},
+                map,
+                title: "{{ item.pharmacyName }}",
+            });
+        {% endfor %}
+        new google.maps.Marker({
+            position: myLatLng,
+            map,
+            title: "한국it교육원",
+        });
+    }
+</script>
+
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCpc4z6aJzR641DNuhibEoENiscudQm3I&callback=initMap">
+</script>
+
+{% endblock %}

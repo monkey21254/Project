@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서적 데이터 변경</title>
+</head>
+<body>
+<form action="/book_edit_process" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="edit_id" value={{ id }} >
+    <table width="300px" border="1" bordercolor="red">
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="title"></td>
+        </tr>
+        <tr>
+            <td>표지</td>
+            <td><input type="file" name="file"></td>
+        </tr>
+        <tr>
+            <td>저자</td>
+            <td><input type="text" name="author"></td>
+        </tr>
+        <tr>
+            <td>가격</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td>ISBN</td>
+            <td><input type="text" name="isbn"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="수 정">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

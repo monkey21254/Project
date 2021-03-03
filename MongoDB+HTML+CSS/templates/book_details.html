@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block contents %}
+
+    <form >
+    <!--
+    Grid 를 활용하여 카드 중앙 정렬
+    : 큰 이미지의 카드의 경우 width 를 조절해주어야 하는데
+      width 값을 넣으면 상속받은 중앙 정렬이 흐트러짐
+    -->
+      <div class="row">
+        <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+              <form >
+                  <div class="card" >
+                    {% if image_data != "None" %}
+                        <img width="100%" height="100%"
+                             src="data:image/jpg;base64, {{ image_data.decode('utf-8') }}" class="card-img-top">
+                    {% else %}
+                        <img width="100%" height="100%"
+                             src="/static/images/error.jpg"; class="card-img-top">
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text">{{ id }}</p>
+                    </div>
+                </div>
+            </form>
+          </div>
+        <div class="col-sm-4"></div>
+      </div>
+    </form>
+
+{% endblock %}
+
