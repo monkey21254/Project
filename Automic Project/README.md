@@ -1,3 +1,4 @@
+![automic](https://user-images.githubusercontent.com/74335601/109662206-262de500-7bae-11eb-869d-3c453b8371b7.png)
 # Raspberry pi & Android Studio → 수동(반자동) 자동차 및 앱 개발
 - 프로젝트명: Automic
 - 참여기간: 2020.10.28 ~ 2020.11.25
@@ -45,5 +46,4 @@
 + 다운로드
 (https://github.com/monkey21254/Project/files/6018952/Automic.Car.pdf)
 
-### Image
-![automic](https://user-images.githubusercontent.com/74335601/109662206-262de500-7bae-11eb-869d-3c453b8371b7.png)
+
