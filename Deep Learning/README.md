@@ -12,7 +12,7 @@
 	- Level2 패키지 내의 모듈을 임포트하여 사용하는 실질적인 작업 공간이 되는 파일
 
 ### PDF (밑바닥부터 시작하는 딥러닝 3 (~제 2고지)
-+ 바로가기
-
-+ 다운로드
-[밑바닥부터 시작하는 딥러닝 3 (~제 2고지).pdf](https://github.com/monkey21254/Project/files/6080416/3.2.pdf)
++ 바로가기    
+(https://github.com/monkey21254/Project/blob/main/Deep%20Learning/%EB%B0%91%EB%B0%94%EB%8B%A5%EB%B6%80%ED%84%B0%20%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94%20%EB%94%A5%EB%9F%AC%EB%8B%9D%203%20(~%EC%A0%9C%202%EA%B3%A0%EC%A7%80).pdf)    
++ 다운로드    
+[밑바닥부터 시작하는 딥러닝 3 (~제 2고지).pdf](https://github.com/monkey21254/Project/files/6080416/3.2.pdf)    
