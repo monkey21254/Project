@@ -1,6 +1,6 @@
 # _Manage & Work to smart-wellness public-works project_
-> #### 사용자 각각에게 최적화된 건강한 식습관을 제공하는 것을 목적으로 사업 아이템 작성
-> 키오스크 활용, 전자 처방전 도입을 통한 환자 대기 시간 단축 등 여러 가지 아이템 가운데 적합한 아이디어를 선정
+> ### 사용자 각각에게 최적화된 건강한 식습관을 제공하는 것을 목적으로 사업 아이템 작성
+> ### 키오스크 활용, 전자 처방전 도입을 통한 환자 대기 시간 단축 등 여러 가지 아이템 가운데 적합한 아이디어를 선정
 >  + period: Jan 4th, 2021 ~ Jan 8th, 2021
 >  + Write report, proposal, plan (Assumption: Startup company / 4 people)
 >    - Draw lean canvas
