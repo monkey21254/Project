@@ -1,4 +1,5 @@
 # Kaggle (VinBigData Chest abnormalities detection) Project
+![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
 
 > Project Team (자세한 설명 및 코드 포함) <https://github.com/X-Ray-Project/main>
 ***
@@ -20,6 +21,3 @@
 (https://github.com/monkey21254/Project/blob/main/Kaggle%20Project/PPT._210226.pdf)
 + 다운로드
 (https://github.com/X-Ray-Project/main/files/6047463/PPT._210226.pdf)
-
-### Image
-![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
