@@ -1,5 +1,5 @@
-![automic](https://user-images.githubusercontent.com/74335601/109662206-262de500-7bae-11eb-869d-3c453b8371b7.png)
 # Raspberry pi & Android Studio → 수동(반자동) 자동차 및 앱 개발
+![automic](https://user-images.githubusercontent.com/74335601/109662206-262de500-7bae-11eb-869d-3c453b8371b7.png)
 - 프로젝트명: Automic
 - 참여기간: 2020.10.28 ~ 2020.11.25
 - 참여인원: 3명 (김기영, 김채진, 서강원, 옥진해, 전고은)
