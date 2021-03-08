@@ -29,9 +29,8 @@ def no_grad():
     return using_config('enable_backprop', False)
 
 
-# Variable work-space
 class Variable:
-    """ Update Version (Level 2-2).
+    """ Update Version (Level 3-2).
     Class Variable : np.array 값을 다루되 다른 멤버변수를 추가적인 특징으로 가져 다양한 정보를 모두 포함시키는 클래스.
 
     Parameter
@@ -50,25 +49,26 @@ class Variable:
     # 재귀 방식은 호출 시마다 메모리에 누적되나 반복문의 경우 pop을 활용해 메모리가 누적되지 않은 상태로 작업을 수월한다.
     __init__
         isinstance : 첫 번째 파라미터값의 타입과 두 번째 파라미터값의 동등 여부를 확인하는 함수
-        >> Update
-            retain_grad : gradient 값(y().grad)을 유지시킬지 설정하는 변수. default = False
-            name : 차후 Variable에 이름을 달아주기 위해 설정
+        retain_grad : gradient 값(y().grad)을 유지시킬지 설정하는 변수. default = False
+        name : 차후 Variable에 이름을 달아주기 위해 설정
     cleargrad
         메모리 절약을 위해서 한 번 할당했던 변수를 또 다시 사용해야 할 경우 기존 메모리에 있던 Variable.grad 정보가 남아있기 때문에 할당을 해제해주어야 제대로 동작을 수행하게 된다.
     backward
         반복문을 이용한 역전파 코드
         while loop 내에서 zip 함수를 활용하여 x.grad에 중복되게 값이 들어갈 경우 기존 노드에 더해지도록 만들어 x + x = 2x 라는 식을 예로 들었을 때, gradient 값이 2로 정상 출력되게 하였음
+        add_func
+            역전파 시 함수가 pop되면서 새로운 값이 들어올 때, 같은 메모리를 참조하는 경우에 중복 방지를 위해서 추가된 함수
+            이미지 결과를 보면 더 이해가 쉽기 때문에 아래 코드블럭 중 Check로 Markdown 표시를 한 곳에서 이미지를 확인하기를 추천!!!
+        weakref
+            순환 참조로 인해 생기는 메모리 누수 문제를 해결하기 위해 import된 weakref 객체에 대해 실제로 값을 출력할 때는 Variable처럼 weakref도 어떠한 기본 데이터타입을 감싸고 있는 형태이므로 기본 생성자를 통해 객체를 호출함과 동시에 output을 사용해 실제 결과값을 확인함
+        self.grad. 즉 역전파 시작 시 기존에는 ndarray 인스턴스를 받았으나 고차 미분을 가능하게 하기 위해 ndarray 인스턴스가 아닌 Variable 인스턴스를 받도록 설정
         >> Update
-            add_func
-                역전파 시 함수가 pop되면서 새로운 값이 들어올 때, 같은 메모리를 참조하는 경우에 중복 방지를 위해서 추가된 함수
-                이미지 결과를 보면 더 이해가 쉽기 때문에 아래 코드블럭 중 Check로 Markdown 표시를 한 곳에서 이미지를 확인하기를 추천!!!
-            weakref
-                순환 참조로 인해 생기는 메모리 누수 문제를 해결하기 위해 import된 weakref 객체에 대해 실제로 값을 출력할 때는 Variable처럼 weakref도 어떠한 기본 데이터타입을 감싸고 있는 형태이므로 기본 생성자를 통해 객체를 호출함과 동시에 output을 사용해 실제 결과값을 확인함
-    >> Update
-        shape, ndim, size, dtype : numpy에 기본적으로 내장되어있는 메서드를 @property 데코레이터를 활용하여 바로 호출할 수 있도록 설정
-        __len__ : data의 길이 반환
-        __repr__ : print로 객체를 표현할 때 return할 값을 설정
-        __mul__ : 다른 객체 또는 데이터타입과의 multiply 기능 지원
+            입력 파라미터에 create_graph 변수 추가. 역전파 1회 계산 후 역전파를 비활성 모드로 실행하게 만드는 파라미터
+            with using_config(name, value) 구문을 생성하여 역전파 설정을 통해 들여쓰기된 구문의 수행 여부를 판단
+    shape, ndim, size, dtype : numpy에 기본적으로 내장되어있는 메서드를 @property 데코레이터를 활용하여 바로 호출할 수 있도록 설정
+    __len__ : data의 길이 반환
+    __repr__ : print로 객체를 표현할 때 return할 값을 설정
+    __mul__ : 다른 객체 또는 데이터타입과의 multiply 기능 지원
     """
     def __init__(self, data, name = None):
         if data is not None:
@@ -113,9 +113,9 @@ class Variable:
         p = str(self.data).replace('\n', '\n' + ' ' * 9)
         return f"variable({p}) from class's __repr__"
 
-    def backward(self, retain_grad = False):
+    def backward(self, retain_grad = False, create_graph = False):
         if self.grad is None:
-            self.grad = np.ones_like(self.data)
+            self.grad = Variable(np.ones_like(self.data))
 
         funcs = []
         seen_set = set()
@@ -131,19 +131,21 @@ class Variable:
         while funcs:
             f = funcs.pop()
             gys = [output().grad for output in f.outputs]
-            gxs = f.backward(*gys)
-            if not isinstance(gxs, tuple):
-                gxs = (gxs,)
 
-            for x, gx in zip(f.inputs, gxs):
-                if x.grad is None:
-                    x.grad = gx
-                else:
-                    x.grad = x.grad + gx
+            with using_config('enable_backprop', create_graph):
+                gxs = f.backward(*gys)
+                if not isinstance(gxs, tuple):
+                    gxs = (gxs,)
 
-                if x.creator is not None:
-                    add_func(x.creator)
-        
+                for x, gx in zip(f.inputs, gxs):
+                    if x.grad is None:
+                        x.grad = gx
+                    else:
+                        x.grad = x.grad + gx
+
+                    if x.creator is not None:
+                        add_func(x.creator)
+            
             if not retain_grad:
                 for y in f.outputs:
                     y().grad = None
@@ -164,7 +166,7 @@ def as_array(x):
 
 
 class Function:
-    """ Update Version (Level 2-3).
+    """ Update Version (Level 3-1).
     Class Function : Variable 객체가 수행하는 함수들을 가지고 있는 클래스
 
     Parameter
@@ -215,8 +217,6 @@ class Function:
         raise NotImplementedError()
 
 
-# Function 클래스를 상속받는 하위 클래스 선언
-# (Add, Neg, Sub, Mul, Div, Pow)
 class Add(Function):
     def forward(self, x0, x1):
         y = x0 + x1
@@ -267,9 +267,9 @@ class Mul(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
+        """ Update: self.inputs[0].data, self.inputs[1].data >> self.inputs """
+        x0, x1 = self.inputs
         return x1 * gy, x0 * gy
-
 
 def mul(x0, x1):
     x1 = as_array(x1)
@@ -282,7 +282,7 @@ class Div(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
+        x0, x1 = self.inputs
         gx0 = gy / x1
         gx1 = gy * (-x0 / x1 ** 2)
         return gx0, gx1
@@ -306,7 +306,7 @@ class Pow(Function):
         return y
 
     def backward(self, gy):
-        x = self.inputs[0].data
+        x = self.inputs[0]
         c = self.c
 
         gx = c * x ** (c - 1) * gy
@@ -317,7 +317,6 @@ def pow(x, c):
     return Pow(c)(x)
 
 
-# Variable 객체에 연산자 오버로딩이 가능하도록 설정
 def setup_variable():
     Variable.__add__ = add
     Variable.__radd__ = add
