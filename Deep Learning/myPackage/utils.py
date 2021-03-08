@@ -116,10 +116,11 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
     dot_graph = get_dot_graph(output, verbose)
 
     # dot 데이터를 파일에 저장
-    tmp_dir = os.path.join(os.path.expanduser('~'), '.DL_level3')
+    # tmp_dir = os.path.join(os.path.expanduser('~'), '.DL_level3')
+    tmp_dir = os.path.join('..', 'Level3')
     if not os.path.exists(tmp_dir):
         os.mkdir(tmp_dir)
-    graph_path = os.path.join(tmp_dir, 'tmp_graph.dot')
+    graph_path = os.path.join(tmp_dir, to_file[:-4] + '.dot') 
 
     with open(graph_path, 'w') as f:
         f.write(dot_graph)
@@ -128,4 +129,3 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
     extension = os.path.splitext(to_file)[1][1:] # 확장자(png, pdf 등)
     cmd = f'dot {graph_path} -T {extension} -o Level3/{to_file}'
     subprocess.run(cmd, shell=True)
-    
