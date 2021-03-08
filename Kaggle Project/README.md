@@ -1,8 +1,7 @@
 # Kaggle (VinBigData Chest abnormalities detection) Project
-![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
-
 > Project Team (자세한 설명 및 코드 포함) <https://github.com/X-Ray-Project/main>
 ***
+![x-ray](https://user-images.githubusercontent.com/74335601/109665208-48753200-7bb1-11eb-9cb3-ebbeedd57af1.png)
 
 < 프로젝트 (1차 목표 기간) 종료 >
 - Period: Feb 8, 2021 ~ Feb 26, 2021
