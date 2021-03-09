@@ -2,7 +2,6 @@ import numpy as np
 import weakref
 import contextlib
 
-
 class Config:
     """
     Flag 설정 class

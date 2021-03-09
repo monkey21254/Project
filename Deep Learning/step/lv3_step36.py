@@ -1,0 +1,17 @@
+if '__file__' in globals():
+    import os, sys
+    print('__file__ in globals')
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+import numpy as np
+from myPackage import Variable
+
+x = Variable(np.array(2.))
+y = x ** 2
+y.backward(create_graph=True)
+gx = x.grad
+x.cleargrad()
+
+z = gx ** 3 + y
+z.backward()
+print(x.grad)

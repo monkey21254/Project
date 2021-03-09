@@ -1,0 +1,25 @@
+digraph g {
+2225240702688 [label="gx1", color=orange, style=filled]
+2225265526096 [label="Mul", color=lightblue, style=filled, shape=box]
+2225228745456 -> 2225265526096
+2225228676592 -> 2225265526096
+2225265526096 -> 2225240702688
+2225228745456 [label="", color=orange, style=filled]
+2225228676592 [label="", color=orange, style=filled]
+2225228676016 [label="Sub", color=lightblue, style=filled, shape=box]
+2225228676784 -> 2225228676016
+2225228676496 -> 2225228676016
+2225228676016 -> 2225228676592
+2225228676784 [label="", color=orange, style=filled]
+2225228676496 [label="", color=orange, style=filled]
+2225228676112 [label="Mul", color=lightblue, style=filled, shape=box]
+2225228705856 -> 2225228676112
+2225228705856 -> 2225228676112
+2225228676112 -> 2225228676496
+2225228705856 [label="y", color=orange, style=filled]
+2225228705856 [label="y", color=orange, style=filled]
+2225228705952 [label="Tanh", color=lightblue, style=filled, shape=box]
+2225228745552 -> 2225228705952
+2225228705952 -> 2225228705856
+2225228745552 [label="x", color=orange, style=filled]
+}
