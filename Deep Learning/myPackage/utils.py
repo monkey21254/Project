@@ -157,6 +157,8 @@ def reshape_sum_backward(gy, x_shape, axis, keepdims):
     else:
         shape = gy.shape
 
+    print(shape)
+
     gy = gy.reshape(shape)  # reshape
     return gy
 
@@ -180,3 +182,5 @@ def sum_to(x, shape):
     if lead > 0:
         y = y.squeeze(lead_axis) # https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html
     return y
+
+
