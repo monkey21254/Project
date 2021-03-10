@@ -1,3 +1,4 @@
+import myPackage
 import numpy as np
 import weakref
 import contextlib
@@ -29,7 +30,7 @@ def no_grad():
 
 
 class Variable:
-    """ Update Version (Level 3-2).
+    """ Update Version (Level 4-3).
     Class Variable : np.array 값을 다루되 다른 멤버변수를 추가적인 특징으로 가져 다양한 정보를 모두 포함시키는 클래스.
 
     Parameter
@@ -61,13 +62,17 @@ class Variable:
         weakref
             순환 참조로 인해 생기는 메모리 누수 문제를 해결하기 위해 import된 weakref 객체에 대해 실제로 값을 출력할 때는 Variable처럼 weakref도 어떠한 기본 데이터타입을 감싸고 있는 형태이므로 기본 생성자를 통해 객체를 호출함과 동시에 output을 사용해 실제 결과값을 확인함
         self.grad. 즉 역전파 시작 시 기존에는 ndarray 인스턴스를 받았으나 고차 미분을 가능하게 하기 위해 ndarray 인스턴스가 아닌 Variable 인스턴스를 받도록 설정
-        >> Update
-            입력 파라미터에 create_graph 변수 추가. 역전파 1회 계산 후 역전파를 비활성 모드로 실행하게 만드는 파라미터
-            with using_config(name, value) 구문을 생성하여 역전파 설정을 통해 들여쓰기된 구문의 수행 여부를 판단
+        입력 파라미터에 create_graph 변수 추가. 역전파 1회 계산 후 역전파를 비활성 모드로 실행하게 만드는 파라미터
+        with using_config(name, value) 구문을 생성하여 역전파 설정을 통해 들여쓰기된 구문의 수행 여부를 판단
     shape, ndim, size, dtype : numpy에 기본적으로 내장되어있는 메서드를 @property 데코레이터를 활용하여 바로 호출할 수 있도록 설정
     __len__ : data의 길이 반환
     __repr__ : print로 객체를 표현할 때 return할 값을 설정
     __mul__ : 다른 객체 또는 데이터타입과의 multiply 기능 지원
+    reshape(self, *shape) : 만약에 가변인자로 들어오는 shape 값이 1개인 경우 그 값의 instance가 tuple or list일 때 shape[0]를 shape로 지정하고 그 외의 경우에는 myPackage.functions.reshape 함수를 사용하여 *shape의 값을 그대로 반영하여 reshape 진행
+    transpose : Variable 인스턴스에서 transpose 메서드를 호출했을 때, myPackage.functions에서 transpose 함수를 바로 호출할 수 있도록 설정
+    T : transpose를 바로 실행할 수 있도록 만든 @property function. @property 데코레이터를 사용하여 self 객체를 instance 변수로 바로 사용할 수 있도록 설정하였음
+    >> Update
+        sum : myPackage.functions.sum 함수를 호출하여 Variable 인스턴스에서 바로 sum 함수를 호출할 수 있도록 설정
     """
     def __init__(self, data, name = None):
         if data is not None:
@@ -103,6 +108,10 @@ class Variable:
     def dtype(self):
         return self.data.dtype
 
+    @property
+    def T(self):
+        return myPackage.functions.transpose(self)
+
     def __len__(self):
         return len(self.data)
 
@@ -111,6 +120,17 @@ class Variable:
             return "variable(None)"
         p = str(self.data).replace('\n', '\n' + ' ' * 9)
         return f"variable({p}) from class's __repr__"
+
+    def reshape(self, *shape):
+        if len(shape) == 1 and isinstance(shape[0], (tuple, list)):
+            shape = shape[0]
+        return myPackage.functions.reshape(self, shape)
+
+    def transpose(self):
+        return myPackage.functions.transpose(self)
+
+    def sum(self, axis=None, keepdims=False):
+        return myPackage.functions.sum(self, axis, keepdims)
 
     def backward(self, retain_grad = False, create_graph = False):
         if self.grad is None:
@@ -216,14 +236,26 @@ class Function:
         raise NotImplementedError()
 
 
-class Add(Function):
+# class Add(Function):
+#     def forward(self, x0, x1):
+#         y = x0 + x1
+#         return y
+
+#     def backward(self, gy):
+#         return gy, gy
+
+class Add(Function): # Update - Level 4 (step 40)
     def forward(self, x0, x1):
+        self.x0_shape, self.x1_shape = x0.shape, x1.shape
         y = x0 + x1
         return y
 
     def backward(self, gy):
-        return gy, gy
-
+        gx0, gx1 = gy, gy
+        if self.x0_shape != self.x1_shape:
+            gx0 = myPackage.functions.sum_to(gx0, self.x0_shape)
+            gx1 = myPackage.functions.sum_to(gx1, self.x1_shape)
+        return gx0, gx1
 
 def add(x0, x1):
     x1 = as_array(x1)
