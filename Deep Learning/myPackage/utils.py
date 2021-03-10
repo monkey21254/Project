@@ -1,7 +1,7 @@
 # myPackage/utils.py
 if '__file__' in globals():
     import os, sys
-    print('__file__ in globals')
+    print('__file__ in globals at utils.py')
     sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import os
@@ -142,8 +142,10 @@ def reshape_sum_backward(gy, x_shape, axis, keepdims):
     Returns:
         myPackage.Variable: Gradient variable which is reshaped appropriately
     """
+
     ndim = len(x_shape)
     tupled_axis = axis
+
     if axis is None:
         tupled_axis = None
     elif not isinstance(axis, tuple):
@@ -157,9 +159,7 @@ def reshape_sum_backward(gy, x_shape, axis, keepdims):
     else:
         shape = gy.shape
 
-    print(shape)
-
-    gy = gy.reshape(shape)  # reshape
+    gy = gy.reshape(shape)  # Variable.reshape(shape)
     return gy
 
 

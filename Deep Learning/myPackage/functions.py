@@ -110,6 +110,19 @@ def transpose(x, axes=None):
 
 
 class Sum(Function):
+    """
+    Sum Class
+
+    Args
+    ----
+    gy : It means an input parameter to get result(gx(using functions.broadcast_to)) from previous backprop gradient.
+
+    Methods
+    -------
+    __init__ : Get parameters(axis, keepdims) for saving configs. An options(Axis and keepdims) are used at np.sum function and backpropagation.
+    forward : Using x(Variable.data), y is resulted from x.sum(numpy.sum) and options(axis, keepdims).
+    backward : This function need to return gx(Variable.data) using utils.reshape_sum_backward to get sum variable's original form(shape). So gy is used to function(boradcast_to) and get origin form(x_shape) and gx(Variable.data).
+    """
     def __init__(self, axis, keepdims):
         self.axis = axis
         self.keepdims = keepdims
@@ -129,6 +142,15 @@ def sum(x, axis=None, keepdims=False):
 
 
 class BroadcastTo(Function):
+    """
+    BroadcastTo Class
+
+    Methods
+    -------
+    __init__ : Get parameters(shape) for saving configs. An option is used at np.broadcast_to function and backpropagation.
+    forward : Calculate an array to apply broadcast with ndarray.shape.
+    backward : Broadcast and SumTo classes are an exclusive relationship between forward prop and backward prop.
+    """
     def __init__(self, shape):
         self.shape = shape
 
@@ -148,6 +170,15 @@ def broadcast_to(x, shape):
 
 
 class SumTo(Function):
+    """
+    SumTo Class
+
+    Methods
+    -------
+    __init__ : Get parameters(shape) for saving configs. An option is used at utils.sum_to function to get suqeezed ndarray.shape(Variable.data) and backpropagation.
+    forward : Calculate an array to apply sum_to function with ndarray.shape.
+    backward : Broadcast and SumTo classes are an exclusive relationship between forward prop and backward prop.
+    """
     def __init__(self, shape):
         self.shape = shape
 
@@ -166,3 +197,24 @@ def sum_to(x, shape):
     return SumTo(shape)(x)
 
 
+class MatMul(Function):
+    """
+    MatMul Class
+
+    Methods
+    -------
+    forward : Calculate an multipled array using np.dot(a, b).
+    backward : The parameters(gx and gW) are get from matmul function. And this parameters are applied to back-propagation(In short, b.p.) after this layer(s).
+    """
+    def forward(self, x, W):
+        y = x.dot(W)
+        return y
+
+    def backward(self, gy):
+        x, W = self.inputs
+        gx = matmul(gy, W.T)
+        gW = matmul(x.T, gy)
+        return gx, gW
+
+def matmul(x, W):
+    return MatMul()(x, W)
