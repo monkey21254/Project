@@ -5,18 +5,19 @@ if '__file__' in globals():
 
 import numpy as np
 import myPackage.functions as F
-from myPackage import Variable
+from myPackage import Variable, Parameter
 import matplotlib.pyplot as plt
 
-# x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
-# y = F.sum(x, axis=0)
-# y.backward()   # gy == variable([1 1 1])
-# print(y)       # Variable([5 7 9])
-# print(x.grad)  # Variable([[1 1 1], [1 1 1]])
+# 브로드캐스트, SumTo 연산 확인
+x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+y = F.sum(x, axis=0)
+y.backward()   # gy == variable([1 1 1])
+print(y)       # Variable([5 7 9])
+print(x.grad)  # Variable([[1 1 1], [1 1 1]])
 
-# x = Variable(np.random.randn(2, 3, 4, 5))
-# y = x.sum(keepdims=True)
-# print(y.shape) # (1, 1, 1, 1)
+x = Variable(np.random.randn(2, 3, 4, 5))
+y = x.sum(keepdims=True)
+print(y.shape) # (1, 1, 1, 1)
 
 
 # 데이터셋
@@ -60,6 +61,7 @@ for i in range(iters):
     if i % 1000 == 0:
         print(loss)
 
+# matplotlib 결과 확인
 plt.scatter(x, y, s=10)
 plt.xlabel('x')
 plt.ylabel('y')
@@ -67,5 +69,16 @@ t = np.arange(0, 1, .01)[:, np.newaxis]
 y_pred = predict(t)
 plt.plot(t, y_pred.data, color='r')
 plt.show()
+
+
+# Parameter Class
+x = Variable(np.array(1.))
+p = Parameter(np.array(2.))
+y = x + p
+
+print(isinstance(p, Variable))
+print(isinstance(p, Parameter))
+print(isinstance(x, Parameter))
+print(isinstance(y, Parameter))
 
 

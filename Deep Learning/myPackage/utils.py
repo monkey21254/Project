@@ -127,7 +127,7 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
 
     # dot 명령 호출
     extension = os.path.splitext(to_file)[1][1:] # 확장자(png, pdf 등)
-    cmd = f'dot {graph_path} -T {extension} -o Level3/{to_file}'
+    cmd = f'dot {graph_path} -T {extension} -o images/{to_file}'
     subprocess.run(cmd, shell=True)
 
 

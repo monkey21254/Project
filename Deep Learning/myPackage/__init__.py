@@ -16,5 +16,8 @@ else:
     from myPackage.core_complex import as_array
     from myPackage.core_complex import as_variable
     from myPackage.core_complex import setup_variable
-    
+    from myPackage.core_complex import Parameter
+    from myPackage.layers import Layer
+    from myPackage.models import Model
+
 setup_variable()

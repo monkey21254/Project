@@ -119,7 +119,7 @@ class Variable:
         if self.data is None:
             return "variable(None)"
         p = str(self.data).replace('\n', '\n' + ' ' * 9)
-        return f"variable({p}) from class's __repr__"
+        return f"variable({p})"
 
     def reshape(self, *shape):
         if len(shape) == 1 and isinstance(shape[0], (tuple, list)):
@@ -359,6 +359,17 @@ def setup_variable():
     Variable.__truediv__ = div
     Variable.__rtruediv__ = rdiv
     Variable.__pow__ = pow
+
+
+class Parameter(Variable):
+    """
+    입력 파라미터를 관리하는 클래스
+    """
+    pass
+
+
+
+
 
 
 if __name__ == '__main__':
