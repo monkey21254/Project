@@ -38,7 +38,7 @@ max_iter = 10000
 hidden_size = 10
 
 model = TwoLayerNet(hidden_size, 1)
-model.plot(y, to_file="level4_4+sine_graph.png")
+model.plot(y, to_file="test.png")
 
 # 학습 시작
 for i in range(max_iter):
@@ -52,4 +52,3 @@ for i in range(max_iter):
         p.data -= lr * p.grad.data
     if i % 1000 == 0:
         print(loss)
-        

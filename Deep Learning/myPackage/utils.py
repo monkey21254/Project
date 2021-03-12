@@ -117,7 +117,7 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
 
     # dot 데이터를 파일에 저장
     # tmp_dir = os.path.join(os.path.expanduser('~'), '.DL_level3')
-    tmp_dir = os.path.join('..', 'Level3')
+    tmp_dir = os.path.join('.', 'images')
     if not os.path.exists(tmp_dir):
         os.mkdir(tmp_dir)
     graph_path = os.path.join(tmp_dir, to_file[:-4] + '.dot') 
