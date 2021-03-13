@@ -1,7 +1,13 @@
+if '__file__' in globals():
+    import os, sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+
 import myPackage
 import numpy as np
 import weakref
 import contextlib
+
 
 class Config:
     """
@@ -359,6 +365,8 @@ def setup_variable():
     Variable.__truediv__ = div
     Variable.__rtruediv__ = rdiv
     Variable.__pow__ = pow
+    Variable.__getitem__ = myPackage.functions.get_item
+
 
 
 class Parameter(Variable):
@@ -375,7 +383,7 @@ class Parameter(Variable):
 if __name__ == '__main__':
     setup_variable()
 
-    x = Variable(np.array(2.0))
+    x = Variable(np.array(2.))
     y = -x
     print(y)  # variable(-2.0)
 
@@ -390,3 +398,11 @@ if __name__ == '__main__':
     y = x ** 3
     y.backward()
     print(y)  # variable(8.0)
+
+    # # as_variable에서 return이 obj가 아닌 Variable(obj)가 됨. 
+    # # 타입이 맞는데 return을 이상한 것으로 함.
+    # x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+    # y = x[1]
+    # print(y)
+
+

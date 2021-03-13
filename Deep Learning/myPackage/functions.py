@@ -2,16 +2,12 @@ import numpy as np
 from myPackage.core_complex import Function
 from myPackage.core_complex import as_variable
 from myPackage import utils
-
-from myPackage import Variable # line 324 (get_array_module)
-gpu_enable = True
-try:
-    import cupy as cp
-    cupy = cp
-except ImportError:
-    gpu_enable = False
+from myPackage import cuda
 
 
+# ==============================================
+# Basic functions: sin / cos / tanh / exp / log
+# ==============================================
 class Sin(Function):
     def forward(self, x):
         y = np.sin(x)
@@ -54,6 +50,39 @@ def tanh(x):
     return Tanh()(x)
 
 
+class Exp(Function):
+    def forward(self, x):
+        xp = cuda.get_array_module(x)
+        y = xp.exp(x)
+        return y
+
+    def backward(self, gy):
+        y = self.outputs[0]() # weakref
+        gx = gy * y
+        return gx
+
+def exp(x):
+    return Exp()(x)
+
+
+class Log(Function):
+    def forward(self, x):
+        xp = cuda.get_array_module(x)
+        y = xp.log(x)
+        return y
+
+    def backward(self, gy):
+        x, = self.inputs
+        gx = gy / x
+        return gx
+
+def log(x):
+    return Log()(x)
+
+
+# =============================================================================
+# Tensor operations: reshape / transpose / get_item / expand_dims / flatten
+# =============================================================================
 class Reshape(Function):
     """
     Reshape Class
@@ -117,6 +146,41 @@ def transpose(x, axes=None):
     return Transpose(axes)(x)
 
 
+class GetItem(Function):
+    def __init__(self, slices):
+        self.slices = slices
+
+    def forward(self, x):
+        y = x[self.slices]
+        return y
+
+    def backward(self, gy):
+        x, = self.inputs
+        f = GetItemGrad(self.slices, x.shape)
+        return f(gy)
+
+
+def get_item(x, slices):
+    return GetItem(slices)(x)
+
+
+class GetItemGrad(Function):
+    def __init__(self, slices, in_shape):
+        self.slices = slices
+        self.in_shape = in_shape
+    
+    def forward(self, gy):
+        gx = np.zeros(self.in_shape)
+        np.add.at(gx, self.slices, gy)
+        return gx
+
+    def backward(self, ggx):
+        return get_item(ggx, self.slices)
+
+
+# =============================================================================
+# sum / sum_to / broadcast_to / average / matmul / linear
+# =============================================================================
 class Sum(Function):
     """
     Sum Class
@@ -228,39 +292,6 @@ def matmul(x, W):
     return MatMul()(x, W)
 
 
-class MeanSquaredError(Function):
-    """
-    MeanSquaredError Class
-
-    Methods
-    -------
-    forward : Calculate a loss(called y_hat).
-    backward : Perform back-prop using differentiation.
-    """    
-    def forward(self, x0, x1):
-        diff = x0 - x1
-        y = (diff ** 2).sum() / len(diff)
-        return y
-
-    def backward(self, gy):
-        x0, x1 = self.inputs
-        diff = x0 - x1
-        gx0 = gy * diff * (2. / len(diff))
-        gx1 = -gx0
-        return gx0, gx1
-
-
-def mean_squared_error(x0, x1):
-    return MeanSquaredError()(x0, x1)
-
-
-def mean_squared_error_simple(x0, x1):
-    x0, x1 = as_variable(x0), as_variable(x1)
-    diff = x0 - x1
-    y = sum(diff ** 2) / len(diff)
-    return y
-
-
 class Linear(Function):
     """
     Linear Class
@@ -298,9 +329,12 @@ def linear_simple(x, W, b=None):
     return y
 
 
+# =============================================================================
+# activation function: sigmoid / relu / softmax / log_softmax / leaky_relu
+# =============================================================================
 class Sigmoid(Function):
     def forward(self, x):
-        xp = get_array_module(x)
+        xp = cuda.get_array_module(x)
         # y = 1 / (1 + xp.exp(-x))
         y = xp.tanh(x * 0.5) * 0.5 + 0.5  # Better implementation
         return y
@@ -321,20 +355,104 @@ def sigmoid_simple(x):
     return y
 
 
-def get_array_module(x): # line 6 (import ...)
-    """Returns the array module for `x`.
-    Args:
-        x (dezero.Variable or numpy.ndarray or cupy.ndarray): Values to
-            determine whether NumPy or CuPy should be used.
-    Returns:
-        module: `cupy` or `numpy` is returned based on the argument.
-    """
-    if isinstance(x, Variable):
-        x = x.data
+def softmax_simple(x, axis=1):
+    x = as_variable(x)
+    y = exp(x)
+    sum_y = sum(y, axis=axis, keepdims=True)
+    return y / sum_y
 
-    if not gpu_enable:
-        return np
-    xp = cp.get_array_module(x)
-    return xp
+
+class Softmax(Function):
+    def __init__(self, axis=1):
+        self.axis = axis
+
+    def forward(self, x):
+        xp = cuda.get_array_module(x)
+        y = x - x.max(axis = self.axis, keepdims = True)
+        y = xp.exp(y)
+        y /= y.sum(axis = self.axis, keepdims = True)
+        return y
+
+    def backward(self, gy):
+        y = self.outputs[0]()
+        gx = y * gy
+        sumdx = gx.sum(axis = self.axis, keepdims = True)
+        gx -= y * sumdx
+        return gx
+        
+def softmax(x, axis = 1):
+    return Softmax(axis)(x)
+
+
+# =============================================================================
+# loss function: mean_squared_error / softmax_cross_entropy / sigmoid_cross_entropy / binary_cross_entropy
+# =============================================================================
+class MeanSquaredError(Function):
+    """
+    MeanSquaredError Class
+
+    Methods
+    -------
+    forward : Calculate a loss(called y_hat).
+    backward : Perform back-prop using differentiation.
+    """    
+    def forward(self, x0, x1):
+        diff = x0 - x1
+        y = (diff ** 2).sum() / len(diff)
+        return y
+
+    def backward(self, gy):
+        x0, x1 = self.inputs
+        diff = x0 - x1
+        gx0 = gy * diff * (2. / len(diff))
+        gx1 = -gx0
+        return gx0, gx1
+
+
+def mean_squared_error(x0, x1):
+    return MeanSquaredError()(x0, x1)
+
+
+def mean_squared_error_simple(x0, x1):
+    x0, x1 = as_variable(x0), as_variable(x1)
+    diff = x0 - x1
+    y = sum(diff ** 2) / len(diff)
+    return y
+
+
+def softmax_cross_entropy_simple(x, t):
+    x, t = as_variable(x), as_variable(t)
+    N = x.shape[0]
+
+    p = softmax(x)
+    p = clip(p, 1e-15, 1.0)
+    log_p = log(p)
+    tlog_p = log_p[np.arange(N), t.data]
+    y = -1 * sum(tlog_p) / N
+    return y
+
+
+# =============================================================================
+# max / min / clip
+# =============================================================================
+class Clip(Function):
+    def __init__(self, x_min, x_max):
+        self.x_min = x_min
+        self.x_max = x_max
+
+    def forward(self, x):
+        xp = cuda.get_array_module(x)
+        y = xp.clip(x, self.x_min, self.x_max)
+        return y
+
+    def backward(self, gy):
+        x, = self.inputs
+        mask = (x.data >= self.x_min) * (x.data <= self.x_max)
+        gx = gy * mask
+        return gx
+
+def clip(x, x_min, x_max):
+    return Clip(x_min, x_max)(x)
+
 
 
