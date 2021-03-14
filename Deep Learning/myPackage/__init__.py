@@ -19,5 +19,6 @@ else:
     from myPackage.core_complex import Parameter
     from myPackage.layers import Layer
     from myPackage.models import Model
+    from myPackage import datasets
 
 setup_variable()

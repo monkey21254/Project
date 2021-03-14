@@ -7,9 +7,13 @@ if '__file__' in globals():
 import os
 import subprocess
 import numpy as np
+from myPackage import cuda
 from myPackage import Variable
 
 
+# =============================================================================
+# Visualize for computational graph
+# =============================================================================
 def _dot_var(v, verbose=False):
     """
     _dot_var : Local 형식으로 사용될 함수
@@ -131,6 +135,30 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
     subprocess.run(cmd, shell=True)
 
 
+# =============================================================================
+# Utility functions for numpy (numpy magic)
+# =============================================================================
+def sum_to(x, shape):
+    """Sum elements along axes to output an array of a given shape.
+    Args:
+        x (ndarray): Input array.
+        shape:
+    Returns:
+        ndarray: Output array of the shape.
+
+    Reference: https://github.com/chainer/chainer/blob/v6.4.0/chainer/utils/array.py#L51-L65
+    """
+    ndim = len(shape)
+    lead = x.ndim - ndim
+    lead_axis = tuple(range(lead))
+
+    axis = tuple([i + lead for i, sx in enumerate(shape) if sx == 1])
+    y = x.sum(lead_axis + axis, keepdims=True)
+    if lead > 0:
+        y = y.squeeze(lead_axis) # https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html
+    return y
+
+
 def reshape_sum_backward(gy, x_shape, axis, keepdims):
     """Reshape gradient appropriately for myPackage.functions.sum's backward.
     Args:
@@ -163,24 +191,14 @@ def reshape_sum_backward(gy, x_shape, axis, keepdims):
     return gy
 
 
-def sum_to(x, shape):
-    """Sum elements along axes to output an array of a given shape.
-    Args:
-        x (ndarray): Input array.
-        shape:
-    Returns:
-        ndarray: Output array of the shape.
-
-    Reference: https://github.com/chainer/chainer/blob/v6.4.0/chainer/utils/array.py#L51-L65
-    """
-    ndim = len(shape)
-    lead = x.ndim - ndim
-    lead_axis = tuple(range(lead))
-
-    axis = tuple([i + lead for i, sx in enumerate(shape) if sx == 1])
-    y = x.sum(lead_axis + axis, keepdims=True)
-    if lead > 0:
-        y = y.squeeze(lead_axis) # https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html
-    return y
+def logsumexp(x, axis = 1):
+    xp = cuda.get_array_module(x)
+    m = x.max(axis=axis, keepdims=True)
+    y = x - m
+    xp.exp(y, out=y)
+    s = y.sum(axis=axis, keepdims=True)
+    xp.log(s, out=s)
+    m += s
+    return m
 
 
