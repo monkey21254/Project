@@ -10,6 +10,7 @@ import myPackage
 from myPackage import optimizers
 import myPackage.functions as F
 from myPackage.models import MLP
+import matplotlib.pyplot as plt
 
 
 # 하이퍼파라미터 설정
@@ -26,6 +27,9 @@ optimizer = optimizers.SGD(lr).setup(model)
 # 학습 진행
 data_size = len(x)
 max_iter = math.ceil(data_size / batch_size) # 소수점 반올림
+
+epoch_list = []
+avg_lost_list = []
 
 for epoch in range(max_epoch):
     # 데이터셋의 인덱스 섞기
@@ -49,4 +53,38 @@ for epoch in range(max_epoch):
     # 에포크마다 학습 경과 출력
     avg_loss = sum_loss / data_size
     print("epoch %d, loss %.2f" % (epoch + 1, avg_loss))
+
+    epoch_list.append(epoch + 1)
+    avg_lost_list.append(avg_loss)
+
+
+# Plot loss graph
+plt.plot(epoch_list, avg_lost_list)
+plt.show()
+
+# Plot boundary area the model predict
+h = 0.001
+x_min, x_max = x[:, 0].min() - .1, x[:, 0].max() + .1
+y_min, y_max = x[:, 1].min() - .1, x[:, 1].max() + .1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+X = np.c_[xx.ravel(), yy.ravel()]
+print(xx.ravel(), xx.shape)
+print(yy.ravel(), yy.shape)
+print(X, X.shape)
+
+with myPackage.no_grad():
+    score = model(X)
+predict_cls = np.argmax(score.data, axis=1)
+print(score.data, score.data.shape)
+Z = predict_cls.reshape(xx.shape)
+plt.contourf(xx, yy, Z)
+
+# Plot data points of the dataset
+N, CLS_NUM = 100, 3
+markers = ['o', 'x', '^']
+colors = ['orange', 'blue', 'green']
+for i in range(len(x)):
+    c = t[i]
+    plt.scatter(x[i][0], x[i][1], s=40,  marker=markers[c], c=colors[c])
+plt.show()
 
