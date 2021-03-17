@@ -11,6 +11,11 @@ import matplotlib.pyplot as plt
 class Dataset:
     def __init__(self, train=True, transform=None, target_transform=None):
         self.train = train
+        """
+        self.transform & self.target_transform 의 경우 호출가능한 객체(e.g. 파이썬 함수 등)를 받습니다.
+        self.transform은 입력 데이터 하나에 대한 변환을 처리하고,
+        self.target_transform은 레이블 하나에 대한 변환을 처리합니다.
+        """
         self.transform = transform
         self.target_transform = target_transform
         if self.transform is None:
@@ -40,6 +45,11 @@ class Dataset:
 # =============================================================================
 # Toy datasets
 # =============================================================================
+class Spiral(Dataset):
+    def prepare(self):
+        self.data, self.label = get_spiral(self.train)
+
+
 def get_spiral(train=True):
     seed = 1984 if train else 2020
     np.random.seed(seed=seed)
@@ -63,11 +73,6 @@ def get_spiral(train=True):
     x = x[indices]
     t = t[indices]
     return x, t
-
-
-class Spiral(Dataset):
-    def prepare(self):
-        self.data, self.label = get_spiral(self.train)
 
 
 # =============================================================================
