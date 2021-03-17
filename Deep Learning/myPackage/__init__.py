@@ -1,5 +1,6 @@
 is_simple_core = False
 
+
 if is_simple_core:
     from myPackage.core_simple import Variable
     from myPackage.core_simple import Function
@@ -20,5 +21,7 @@ else:
     from myPackage.layers import Layer
     from myPackage.models import Model
     from myPackage import datasets
+    from myPackage.dataloaders import DataLoader
+
 
 setup_variable()

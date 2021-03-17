@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 # from myPackage.utils import get_file, cache_dir
-# from myPackage.transforms import Compose, Flatten, ToFloat, Normalize
+from myPackage.transforms import Compose, Flatten, ToFloat, Normalize
 
 
 class Dataset:
