@@ -215,6 +215,3 @@ def pair(x):
         raise ValueError
 
 
-
-
-
