@@ -10,4 +10,8 @@
 		3. 오브젝트 components grouping
 		4. Material > Colorize
 		5. C# coding (simple)
+	# images
+		+ 210323
+		: 실행중인 캡슐 카운트 + 게시판 표시
+		  모든 캡슐의 활동이 종료된 경우 Done 
 ***
