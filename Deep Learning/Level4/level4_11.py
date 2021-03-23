@@ -1,6 +1,6 @@
 if '__file__' in globals():
     import os, sys
-    print('__file__ in globals at level4_9.py')
+    print('__file__ in globals at level4_11.py')
     sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
@@ -87,5 +87,4 @@ ax2.legend(loc='upper left')
 ax2.set_xlabel('epoch')
 ax2.set_ylabel('accuracy')
 plt.show()
-
 
