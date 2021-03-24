@@ -30,7 +30,8 @@ hidden_size = 1000
 train_loader = DataLoader(train_set, batch_size)
 test_loader = DataLoader(test_set, batch_size, shuffle=False)
 
-model = MLP((hidden_size, 10))
+# model = MLP((hidden_size, 10)) # F.sigmoid
+model = MLP((hidden_size, hidden_size, 10), activation=F.relu)
 optimizer = optimizers.SGD().setup(model)
 
 for epoch in range(max_epoch):
@@ -60,7 +61,4 @@ for epoch in range(max_epoch):
 
     print('test loss: {:.4f}, accuracy: {:.4f}'.format(sum_loss / len(test_set), sum_acc / len(test_set)))
         
-
-    
-
 
