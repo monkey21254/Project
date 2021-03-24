@@ -13,7 +13,6 @@ public class Cb1
 
 public class Student_1 : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
@@ -54,11 +53,11 @@ public class Student_1 : MonoBehaviour
     }
 
     void OnMouseDown() {
+
         Debug.Log("OnMouseDown");
     }
 
     void OnMouseUp() {
         Debug.Log("OnMouseUp");
     }
-
 }
