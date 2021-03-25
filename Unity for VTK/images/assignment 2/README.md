@@ -1,5 +1,5 @@
 # Assignment 2
-> Period: Mar 24th, 2021 ~
+> Period: Mar 24th, 2021
 ***
 
 ## Contents
