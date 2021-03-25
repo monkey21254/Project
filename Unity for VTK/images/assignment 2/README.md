@@ -1,6 +1,5 @@
 # Assignment 2
 > Period: Mar 24th, 2021
-***
 
 ## Contents
 > Cylinder를 생성하여 이 Cylinder를 클릭할 경우 교실 외부에 Cylinder 및 Tree를 생성 + 고유 번호 지정
