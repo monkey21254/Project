@@ -1,6 +1,5 @@
 # Assignment 1
 > Period: Mar 23th, 2021
-***
 
 ## Contents
 > 각각의 객체에 머릿말을 달고 움직일 때 따라가도록 설정  
