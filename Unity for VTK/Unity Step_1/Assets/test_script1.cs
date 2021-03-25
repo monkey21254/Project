@@ -41,21 +41,23 @@ public class test_script1 : MonoBehaviour
 
         Destroy(PlantTreeBtn.cylinder_list[1].test_box);
         Destroy(PlantTreeBtn.cylinder_list[1].text_box);
+        Destroy(PlantTreeBtn.cylinder_list[1].obj_box);
         PlantTreeBtn.cylinder_list.RemoveAt(1);
 
         --Ctree.total_tree_count;
-        --CylinderClass.cylinder_name;
+        //--CylinderClass.cylinder_name;
         CylinderClass.vector_list.RemoveAt(Ctree.total_tree_count);
         CylinderClass.vector_list2.RemoveAt(Ctree.total_tree_count);
+        CylinderClass.vector_list3.RemoveAt(Ctree.total_tree_count);
 
         Debug.Log(PlantTreeBtn.cylinder_list.Count);
         foreach (var it in PlantTreeBtn.cylinder_list.Select((Value, Index) => new { Value, Index }))
         {
             it.Value.test_box.transform.position = CylinderClass.vector_list[it.Index];
             it.Value.text_box.transform.position = CylinderClass.vector_list2[it.Index];
+            it.Value.obj_box.transform.position = CylinderClass.vector_list3[it.Index];
             //Debug.LogFormat("{0}: {1}", it.Index, it.Value);
         }
-
 
         // ------------------------------- MEMO
         // 특정 오브젝트 인덱스를 가지고 와야 한다.

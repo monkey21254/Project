@@ -5,7 +5,6 @@ using UnityEngine;
 public class Text_default : MonoBehaviour
 {
     public TextMesh mTm_group;
-
     // Start is called before the first frame update
     void Start()
     {

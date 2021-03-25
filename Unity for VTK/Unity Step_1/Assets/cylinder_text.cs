@@ -9,7 +9,7 @@ public class cylinder_text : MonoBehaviour
     void Start()
     {
         mTm_group = GetComponent<TextMesh>();
-        mTm_group.text = Ctree.total_tree_count.ToString();
+        mTm_group.text = CylinderClass.cylinder_name.ToString();
 
     }
     // Update is called once per frame

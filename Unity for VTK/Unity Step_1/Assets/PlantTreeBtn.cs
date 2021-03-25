@@ -19,13 +19,18 @@ public class CylinderClass //: GameObject
     public GameObject test_box;
     private GameObject textObject;
     public GameObject text_box;
+    private GameObject boxObject;
+    public GameObject obj_box;
+    
     public static int cylinder_name = 0; // 이름 용도
 
     private float for_count;
     private Vector3 vector_init = new Vector3(0, 0, 0);
     private Vector3 vector_init2 = new Vector3(0, 0, 0);
+    private Vector3 vector_init3 = new Vector3(0, 0, 0);
     public static List<Vector3> vector_list = new List<Vector3>();
     public static List<Vector3> vector_list2 = new List<Vector3>();
+    public static List<Vector3> vector_list3 = new List<Vector3>();
 
     // 싱글톤 패턴
     //public static CylinderClass cylinder_obj = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"));
@@ -44,22 +49,32 @@ public class CylinderClass //: GameObject
         vector_init2.x = for_count - 30;
         vector_init2.y = 6;
         vector_init2.z = -20;
+        // Tree
+        vector_init3.x = for_count - 30;
+        vector_init3.y = 3;
+        vector_init3.z = 20;
 
-        this.test_box.transform.position = vector_init; this.text_box.transform.position = vector_init2;
+        this.test_box.transform.position = vector_init;
+        this.text_box.transform.position = vector_init2;
+        this.obj_box.transform.position = vector_init3;
+
         vector_list.Add(vector_init);
         vector_list2.Add(vector_init2);
+        vector_list3.Add(vector_init3);
     }
 
     // 생성자
-    public CylinderClass(GameObject testObject, GameObject textObject)
+    public CylinderClass(GameObject testObject, GameObject textObject, GameObject boxObject)
     {
         this.testObject = testObject;
         this.test_box = MonoBehaviour.Instantiate(this.testObject);
         this.textObject = textObject;
         this.text_box = MonoBehaviour.Instantiate(this.textObject);
+        this.boxObject = boxObject;
+        this.obj_box = MonoBehaviour.Instantiate(this.boxObject);
+
         this.getIndex();
         this.setPosition();
-
     }
 }
 
@@ -82,10 +97,11 @@ public class PlantTreeBtn : MonoBehaviour
 
 
     // Tree
+    /*
     public GameObject boxObject;
     public static GameObject obj_box; // obj: Tree, obj2: Text
     public static List<GameObject> obj_box_list = new List<GameObject>(); // 리스트 생성
-
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -93,14 +109,14 @@ public class PlantTreeBtn : MonoBehaviour
         ++Ctree.total_tree_count;
 
         // ------------------------------- Tree
-        boxObject = (GameObject)Resources.Load("Prefabs/TreeGroup"); // 시작 시 기본 생성 나무
-        obj_box = Instantiate(boxObject); // , transform
-        obj_box.transform.Translate(0, 0, 0);
+        //boxObject = (GameObject)Resources.Load("Prefabs/TreeGroup"); // 시작 시 기본 생성 나무
+        //obj_box = Instantiate(boxObject); // , transform
+        //obj_box.transform.Translate(0, 0, 0);
         //obj_list.Add(obj); // List Start 원소 추가
 
-        Ctree.cb_vec_tree = obj_box.transform.position;
-        Ctree.gText = Ctree.cb_vec_tree.ToString();
-        Debug.Log(Ctree.cb_vec_tree);
+        //Ctree.cb_vec_tree = obj_box.transform.position;
+        //Ctree.gText = Ctree.cb_vec_tree.ToString();
+        //Debug.Log(Ctree.cb_vec_tree);
 
         // ------------------------------- Cylinder
         /*
@@ -116,7 +132,7 @@ public class PlantTreeBtn : MonoBehaviour
         */
 
         // ------------------------------- CylinderClass
-        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"));
+        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
         cylinder_list.Add(custom_cylinder);
         index_list.Add(Ctree.total_tree_count);
 
@@ -132,41 +148,38 @@ public class PlantTreeBtn : MonoBehaviour
     
     void OnMouseDown()
     {
-        if(obj_box != null)
-        {
-            ++Ctree.total_tree_count;
-            // ------------------------------- Tree
-            boxObject = (GameObject)Resources.Load("Prefabs/TreeGroup");
-            obj_box = Instantiate(boxObject);
-            obj_box.transform.Translate((Ctree.total_tree_count - 1) * 10, 0, 0);
-            //obj_list.Add(obj); // List Update 원소 추가
+        ++Ctree.total_tree_count;
+        // ------------------------------- Tree
+        //boxObject = (GameObject)Resources.Load("Prefabs/TreeGroup");
+        //obj_box = Instantiate(boxObject);
+        //obj_box.transform.Translate((Ctree.total_tree_count - 1) * 10, 0, 0);
+        //obj_list.Add(obj); // List Update 원소 추가
 
-            //Ctree.cb_vec_tree = obj.transform.position;
-            //Ctree.gText = Ctree.cb_vec_tree.ToString();
+        //Ctree.cb_vec_tree = obj.transform.position;
+        //Ctree.gText = Ctree.cb_vec_tree.ToString();
 
-            // ------------------------------- Cylinder
-            /*
-            testObject = (GameObject)Resources.Load("Prefabs/Cylinder 1");
-            test_box = Instantiate(testObject); // , transform
-            test_box.transform.Translate((Ctree.total_tree_count - 1) * 10 - 30, 0, -20);
-            test_box_list.Add(test_box);
+        // ------------------------------- Cylinder
+        /*
+        testObject = (GameObject)Resources.Load("Prefabs/Cylinder 1");
+        test_box = Instantiate(testObject); // , transform
+        test_box.transform.Translate((Ctree.total_tree_count - 1) * 10 - 30, 0, -20);
+        test_box_list.Add(test_box);
 
-            textObject = (GameObject)Resources.Load("Prefabs/CylinderText");
-            text_box = Instantiate(textObject); // , transform
-            text_box.transform.Translate(0, 0, (Ctree.total_tree_count - 1) * 10);
-            text_box_list.Add(text_box);
+        textObject = (GameObject)Resources.Load("Prefabs/CylinderText");
+        text_box = Instantiate(textObject); // , transform
+        text_box.transform.Translate(0, 0, (Ctree.total_tree_count - 1) * 10);
+        text_box_list.Add(text_box);
 
-            Debug.Log(text_box_list.Count);
-            */
+        Debug.Log(text_box_list.Count);
+        */
 
-            // ------------------------------- Cylinder Class
-            custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"));
-            cylinder_list.Add(custom_cylinder);
-            index_list.Add(Ctree.total_tree_count);
+        // ------------------------------- Cylinder Class
+        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
+        cylinder_list.Add(custom_cylinder);
+        index_list.Add(Ctree.total_tree_count);
 
 
-            Debug.Log(CylinderClass.cylinder_name);
-        }
+        Debug.Log(CylinderClass.cylinder_name);
 
     }
     

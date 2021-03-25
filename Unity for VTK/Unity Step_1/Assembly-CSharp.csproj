@@ -53,13 +53,14 @@
      <Compile Include="Assets\Text_2.cs" />
      <Compile Include="Assets\Tree_default.cs" />
      <Compile Include="Assets\Text_1.cs" />
-     <Compile Include="Assets\Text_default_temp.cs" />
      <Compile Include="Assets\Student_2.cs" />
      <Compile Include="Assets\TreeBox_default.cs" />
      <Compile Include="Assets\Text_default.cs" />
+     <Compile Include="Assets\test_script1.cs" />
      <Compile Include="Assets\Camera_1.cs" />
      <Compile Include="Assets\Text_3.cs" />
      <Compile Include="Assets\Student_3.cs" />
+     <Compile Include="Assets\cylinder_text.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
