@@ -10,7 +10,9 @@ public class Text_default : MonoBehaviour
     void Start()
     {
         mTm_group = GetComponent<TextMesh>();
-        mTm_group.text = Ctree.total_tree_count.ToString();
+        mTm_group.text = CylinderClass.cylinder_name.ToString();
+
+        //Debug.Log("Text_default");
     }
     
     // Update is called once per frame

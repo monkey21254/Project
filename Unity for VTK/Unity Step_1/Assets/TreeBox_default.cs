@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TreeBox_default : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start" + Ctree.total_tree_count.ToString());
+        
+        //Debug.Log(tree_test);
+        //Debug.Log(text_test);
+
+        //Debug.Log("TreeBox_default");
     }
 
     // Update is called once per frame
@@ -19,12 +24,15 @@ public class TreeBox_default : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("test");
-        Destroy(this);
+        Debug.Log("TreeBox_Destroy");
+    }
+
+    void OnMouseUp() {
+        Debug.Log("OnMouseUp");
     }
 
     void OnDestroy()
     {
-        Destroy(this);
+        //Debug.Log("Box_OnDestroy");
     }
 }
