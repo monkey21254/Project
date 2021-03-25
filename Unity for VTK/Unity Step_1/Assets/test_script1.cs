@@ -39,13 +39,20 @@ public class test_script1 : MonoBehaviour
         // ------------------------------- Cylinder Class
         //Destroy(PlantTreeBtn.cylinder_list[CylinderClass.cylinder_name - 1]); // 상속 및 derive 오류 해결 필요.
 
-        Destroy(PlantTreeBtn.cylinder_list[1].test_box);
-        Destroy(PlantTreeBtn.cylinder_list[1].text_box);
-        Destroy(PlantTreeBtn.cylinder_list[1].obj_box);
-        PlantTreeBtn.cylinder_list.RemoveAt(1);
+
+        for (int i = 0; i != PlantTreeBtn.cylinder_list.Count; ++i)
+        {
+            if (PlantTreeBtn.cylinder_list[i].test_box == gameObject)
+            {
+                Destroy(PlantTreeBtn.cylinder_list[i].test_box);
+                Destroy(PlantTreeBtn.cylinder_list[i].text_box);
+                Destroy(PlantTreeBtn.cylinder_list[i].obj_box);
+                PlantTreeBtn.cylinder_list.RemoveAt(i);
+                break;
+            }
+        }
 
         --Ctree.total_tree_count;
-        //--CylinderClass.cylinder_name;
         CylinderClass.vector_list.RemoveAt(Ctree.total_tree_count);
         CylinderClass.vector_list2.RemoveAt(Ctree.total_tree_count);
         CylinderClass.vector_list3.RemoveAt(Ctree.total_tree_count);
@@ -58,9 +65,6 @@ public class test_script1 : MonoBehaviour
             it.Value.obj_box.transform.position = CylinderClass.vector_list3[it.Index];
             //Debug.LogFormat("{0}: {1}", it.Index, it.Value);
         }
-
-        // ------------------------------- MEMO
-        // 특정 오브젝트 인덱스를 가지고 와야 한다.
     }
 
 

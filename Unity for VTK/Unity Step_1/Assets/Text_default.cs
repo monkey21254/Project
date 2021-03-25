@@ -19,4 +19,9 @@ public class Text_default : MonoBehaviour
     {
         
     }
+
+    void OnDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

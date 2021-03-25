@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class Ctree
@@ -93,8 +94,6 @@ public class PlantTreeBtn : MonoBehaviour
     // Cylinder Class
     public CylinderClass custom_cylinder;
     public static List<CylinderClass> cylinder_list = new List<CylinderClass>();
-    public static List<int> index_list = new List<int>(); // 특정한 인덱스에 접근해서 destroy를 하기 위한 용도로 사용될 것입니다.
-
 
     // Tree
     /*
@@ -134,8 +133,6 @@ public class PlantTreeBtn : MonoBehaviour
         // ------------------------------- CylinderClass
         custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
         cylinder_list.Add(custom_cylinder);
-        index_list.Add(Ctree.total_tree_count);
-
 
         Debug.Log(CylinderClass.cylinder_name);
     }
@@ -174,13 +171,24 @@ public class PlantTreeBtn : MonoBehaviour
         */
 
         // ------------------------------- Cylinder Class
-        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
-        cylinder_list.Add(custom_cylinder);
-        index_list.Add(Ctree.total_tree_count);
-
+        try
+        {
+            if ((Ctree.total_tree_count <= 5) == false)
+            {
+                throw new Exception("Out of Range error....");
+            }
+            else
+            {
+                custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
+                cylinder_list.Add(custom_cylinder);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
 
         Debug.Log(CylinderClass.cylinder_name);
-
     }
     
     void OnMouseUp()
