@@ -7,6 +7,11 @@ import myPackage
 import numpy as np
 import weakref
 import contextlib
+try:
+    import cupy
+    array_types = (np.ndarray, cupy.ndarray)
+except ImportError:
+    array_types = (np.ndarray)
 
 
 class Config:
@@ -36,7 +41,7 @@ def no_grad():
 
 
 class Variable:
-    """ Update Version (Level 4-3).
+    """ Update Version (Level 5-1).
     Class Variable : np.array 값을 다루되 다른 멤버변수를 추가적인 특징으로 가져 다양한 정보를 모두 포함시키는 클래스.
 
     Parameter
@@ -57,6 +62,8 @@ class Variable:
         isinstance : 첫 번째 파라미터값의 타입과 두 번째 파라미터값의 동등 여부를 확인하는 함수
         retain_grad : gradient 값(y().grad)을 유지시킬지 설정하는 변수. default = False
         name : 차후 Variable에 이름을 달아주기 위해 설정
+        >> Update
+        : array_types라는 tuple에 모듈 type을 저장한 후 해당 타입을 init에서 체크
     cleargrad
         메모리 절약을 위해서 한 번 할당했던 변수를 또 다시 사용해야 할 경우 기존 메모리에 있던 Variable.grad 정보가 남아있기 때문에 할당을 해제해주어야 제대로 동작을 수행하게 된다.
     backward
@@ -70,6 +77,8 @@ class Variable:
         self.grad. 즉 역전파 시작 시 기존에는 ndarray 인스턴스를 받았으나 고차 미분을 가능하게 하기 위해 ndarray 인스턴스가 아닌 Variable 인스턴스를 받도록 설정
         입력 파라미터에 create_graph 변수 추가. 역전파 1회 계산 후 역전파를 비활성 모드로 실행하게 만드는 파라미터
         with using_config(name, value) 구문을 생성하여 역전파 설정을 통해 들여쓰기된 구문의 수행 여부를 판단
+        >> Update
+        : myPackage.cuda.get_array_module로 데이터타입 체크 후 import할 모듈 선택하는 구문 추가
     shape, ndim, size, dtype : numpy에 기본적으로 내장되어있는 메서드를 @property 데코레이터를 활용하여 바로 호출할 수 있도록 설정
     __len__ : data의 길이 반환
     __repr__ : print로 객체를 표현할 때 return할 값을 설정
@@ -77,12 +86,11 @@ class Variable:
     reshape(self, *shape) : 만약에 가변인자로 들어오는 shape 값이 1개인 경우 그 값의 instance가 tuple or list일 때 shape[0]를 shape로 지정하고 그 외의 경우에는 myPackage.functions.reshape 함수를 사용하여 *shape의 값을 그대로 반영하여 reshape 진행
     transpose : Variable 인스턴스에서 transpose 메서드를 호출했을 때, myPackage.functions에서 transpose 함수를 바로 호출할 수 있도록 설정
     T : transpose를 바로 실행할 수 있도록 만든 @property function. @property 데코레이터를 사용하여 self 객체를 instance 변수로 바로 사용할 수 있도록 설정하였음
-    >> Update
-        sum : myPackage.functions.sum 함수를 호출하여 Variable 인스턴스에서 바로 sum 함수를 호출할 수 있도록 설정
+    sum : myPackage.functions.sum 함수를 호출하여 Variable 인스턴스에서 바로 sum 함수를 호출할 수 있도록 설정
     """
     def __init__(self, data, name = None):
         if data is not None:
-            if not isinstance(data, np.ndarray):
+            if not isinstance(data, array_types):
                 raise TypeError(f'{type(data)} is not supported.')
 
         self.data = data
@@ -140,7 +148,8 @@ class Variable:
 
     def backward(self, retain_grad = False, create_graph = False):
         if self.grad is None:
-            self.grad = Variable(np.ones_like(self.data))
+            xp = myPackage.cuda.get_array_module(self.data)
+            self.grad = Variable(xp.ones_like(self.data))
 
         funcs = []
         seen_set = set()

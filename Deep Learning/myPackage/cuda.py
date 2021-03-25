@@ -1,11 +1,11 @@
 import numpy as np
-from myPackage import Variable
 gpu_enable = True
 try:
     import cupy as cp
     cupy = cp
 except ImportError:
     gpu_enable = False
+from myPackage import Variable
 
 
 def get_array_module(x):
@@ -24,4 +24,24 @@ def get_array_module(x):
     xp = cp.get_array_module(x)
     return xp
 
+
+def as_numpy(x):
+    if isinstance(x, Variable):
+        x = x.data
+
+    if np.isscalar(x):
+        x = np.array(x)
+    elif isinstance(x, np.ndarray):
+        return x
+    return cp.asnumpy(x)
+
+
+def as_cupy(x):
+    if isinstance(x, Variable):
+        x = x.data
+
+    if not gpu_enable:
+        raise Exception("Cupy module can't load.")
+    return cp.asarray(x)
+    
 
