@@ -5,13 +5,8 @@
 ## Contents
 ### Folder
 	# Unity Step 1
-		1. 오브젝트 생성
-		2. 카메라 & 오브젝트 이동
-		3. 오브젝트 components grouping
-		4. Material > Colorize
-		5. C# coding (simple)
+	: 현재 진행중인 유니티 프로젝트 전체 파일 디렉토리
 	# images
-		+ 210323
-		: 실행중인 캡슐 카운트 + 게시판 표시
-		  모든 캡슐의 활동이 종료된 경우 Done 
+	: Assignment 별로 했던 내용 해당 폴더 아래 README.md 에 업데이트
+		 
 ***
