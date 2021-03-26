@@ -16,21 +16,21 @@ public class Ctree
 public class CylinderClass //: GameObject
 {
     // 변수 지정
-    private GameObject testObject;
-    public GameObject test_box;
-    private GameObject textObject;
-    public GameObject text_box;
+    //private GameObject testObject;
+    //public GameObject test_box;
+    //private GameObject textObject;
+    //public GameObject text_box;
     private GameObject boxObject;
     public GameObject obj_box;
     
     public static int cylinder_name = 0; // 이름 용도
 
     private float for_count;
-    private Vector3 vector_init = new Vector3(0, 0, 0);
-    private Vector3 vector_init2 = new Vector3(0, 0, 0);
+    //private Vector3 vector_init = new Vector3(0, 0, 0);
+    //private Vector3 vector_init2 = new Vector3(0, 0, 0);
     private Vector3 vector_init3 = new Vector3(0, 0, 0);
-    public static List<Vector3> vector_list = new List<Vector3>();
-    public static List<Vector3> vector_list2 = new List<Vector3>();
+    //public static List<Vector3> vector_list = new List<Vector3>();
+    //public static List<Vector3> vector_list2 = new List<Vector3>();
     public static List<Vector3> vector_list3 = new List<Vector3>();
 
     // 싱글톤 패턴
@@ -42,35 +42,36 @@ public class CylinderClass //: GameObject
     {
         for_count = (Ctree.total_tree_count - 1) * 10;
         
-        // cylinder
-        vector_init.x = for_count - 30;
-        vector_init.y = 6;
-        vector_init.z = -20;
-        // text
-        vector_init2.x = for_count - 30;
-        vector_init2.y = 6;
-        vector_init2.z = -20;
+        //// cylinder
+        //vector_init.x = for_count - 30;
+        //vector_init.y = 6;
+        //vector_init.z = -20;
+        //// text
+        //vector_init2.x = for_count - 30;
+        //vector_init2.y = 6;
+        //vector_init2.z = -20;
         // Tree
         vector_init3.x = for_count - 30;
         vector_init3.y = 3;
         vector_init3.z = 20;
 
-        this.test_box.transform.position = vector_init;
-        this.text_box.transform.position = vector_init2;
+        //this.test_box.transform.position = vector_init;
+        //this.text_box.transform.position = vector_init2;
         this.obj_box.transform.position = vector_init3;
 
-        vector_list.Add(vector_init);
-        vector_list2.Add(vector_init2);
+        //vector_list.Add(vector_init);
+        //vector_list2.Add(vector_init2);
         vector_list3.Add(vector_init3);
     }
 
     // 생성자
-    public CylinderClass(GameObject testObject, GameObject textObject, GameObject boxObject)
+    //public CylinderClass(GameObject testObject, GameObject textObject, GameObject boxObject)
+    public CylinderClass(GameObject boxObject)
     {
-        this.testObject = testObject;
-        this.test_box = MonoBehaviour.Instantiate(this.testObject);
-        this.textObject = textObject;
-        this.text_box = MonoBehaviour.Instantiate(this.textObject);
+        //this.testObject = testObject;
+        //this.test_box = MonoBehaviour.Instantiate(this.testObject);
+        //this.textObject = textObject;
+        //this.text_box = MonoBehaviour.Instantiate(this.textObject);
         this.boxObject = boxObject;
         this.obj_box = MonoBehaviour.Instantiate(this.boxObject);
 
@@ -134,7 +135,8 @@ public class PlantTreeBtn : MonoBehaviour
         */
 
         // ------------------------------- CylinderClass
-        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
+        //custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
+        custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/TreeGroup"));
         cylinder_list.Add(custom_cylinder);
 
         Debug.Log(CylinderClass.cylinder_name);
@@ -186,7 +188,7 @@ public class PlantTreeBtn : MonoBehaviour
             }
             else
             {
-                custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/Cylinder 1"), (GameObject)Resources.Load("Prefabs/CylinderText"), (GameObject)Resources.Load("Prefabs/TreeGroup"));
+                custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/TreeGroup"));
                 cylinder_list.Add(custom_cylinder);
             }
         }

@@ -48,8 +48,8 @@ public class TreeBox_default : MonoBehaviour
         {
             if (PlantTreeBtn.cylinder_list[i].obj_box == gameObject)
             {
-                Destroy(PlantTreeBtn.cylinder_list[i].test_box);
-                Destroy(PlantTreeBtn.cylinder_list[i].text_box);
+                //Destroy(PlantTreeBtn.cylinder_list[i].test_box);
+                //Destroy(PlantTreeBtn.cylinder_list[i].text_box);
                 Destroy(PlantTreeBtn.cylinder_list[i].obj_box);
                 PlantTreeBtn.cylinder_list.RemoveAt(i);
                 break;
@@ -61,16 +61,16 @@ public class TreeBox_default : MonoBehaviour
         UnityEngine.Debug.Log("ElapsedMilliseconds: " + sw.ElapsedMilliseconds.ToString() + "ms");
 
         --Ctree.total_tree_count;
-        CylinderClass.vector_list.RemoveAt(Ctree.total_tree_count);
-        CylinderClass.vector_list2.RemoveAt(Ctree.total_tree_count);
+        //CylinderClass.vector_list.RemoveAt(Ctree.total_tree_count);
+        //CylinderClass.vector_list2.RemoveAt(Ctree.total_tree_count);
         CylinderClass.vector_list3.RemoveAt(Ctree.total_tree_count);
         
         // UnityEngine & Diagnostic Debug Ãæµ¹ ÀÌ½´
         UnityEngine.Debug.Log(PlantTreeBtn.cylinder_list.Count);
         foreach (var it in PlantTreeBtn.cylinder_list.Select((Value, Index) => new { Value, Index }))
         {
-            it.Value.test_box.transform.position = CylinderClass.vector_list[it.Index];
-            it.Value.text_box.transform.position = CylinderClass.vector_list2[it.Index];
+            //it.Value.test_box.transform.position = CylinderClass.vector_list[it.Index];
+            //it.Value.text_box.transform.position = CylinderClass.vector_list2[it.Index];
             it.Value.obj_box.transform.position = CylinderClass.vector_list3[it.Index];
 
             //Debug.LogFormat("{0}: {1}", it.Index, it.Value);

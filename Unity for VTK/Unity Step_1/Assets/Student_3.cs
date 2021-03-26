@@ -37,10 +37,17 @@ public class Student_3 : MonoBehaviour
         } else {
             Cb3.cb3_bool = true;
         }
-
         temp3 = transform.position;
 
-        Cb3.gText = transform.position.ToString();
+        if (Cb3.cb3_bool == false)
+        {
+            Cb3.gText = "¼ö¸® Áß";
+        }
+        else
+        {
+            Cb3.gText = transform.position.ToString();
+        }
+
         Cb3.cb_vec3 = transform.position;
     }
 }

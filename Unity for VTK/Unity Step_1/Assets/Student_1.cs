@@ -44,11 +44,18 @@ public class Student_1 : MonoBehaviour
         } else {
             Cb1.cb1_bool = true;
         }
-
         temp1 = transform.position;
 
         // 좌표 값 할당
-        Cb1.gText = transform.position.ToString();
+        if(Cb1.cb1_bool == false)
+        {
+            Cb1.gText = "수리 중";
+        }
+        else
+        {
+            Cb1.gText = transform.position.ToString();
+        }
+
         Cb1.cb_vec1 = transform.position;
     }
 
