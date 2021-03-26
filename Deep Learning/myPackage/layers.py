@@ -104,9 +104,9 @@ class Linear(Layer):
             self.b = Parameter(np.zeros(out_size, dtype=dtype), name='b')
 
 
-    def _init_W(self):
+    def _init_W(self, xp=np):
         I, O = self.in_size, self.out_size
-        W_data = np.random.randn(I, O).astype(self.dtype) * np.sqrt(1 / I)
+        W_data = xp.random.randn(I, O).astype(self.dtype) * np.sqrt(1 / I)
         self.W.data = W_data
 
 
@@ -114,7 +114,8 @@ class Linear(Layer):
         # 데이터를 흘려보내는 시점에 가중치를 초기화
         if self.W.data is None:
             self.in_size = x.shape[1]
-            self._init_W()
+            xp = cuda.get_array_module(x)
+            self._init_W(xp=xp)
 
         y = F.linear(x, self.W, self.b)
         return y

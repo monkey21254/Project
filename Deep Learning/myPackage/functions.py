@@ -11,7 +11,8 @@ from myPackage import Variable
 # ==============================================
 class Sin(Function):
     def forward(self, x):
-        y = np.sin(x)
+        xp = cuda.get_array_module(x)
+        y = xp.sin(x)
         return y
 
     def backward(self, gy):
@@ -25,7 +26,8 @@ def sin(x):
 
 class Cos(Function):
     def forward(self, x):
-        y = np.cos(x)
+        xp = cuda.get_array_module(x)
+        y = xp.cos(x)
         return y
 
     def backward(self, gy):
@@ -39,11 +41,12 @@ def cos(x):
 
 class Tanh(Function):
     def forward(self, x):
-        y = np.tanh(x)
+        xp = cuda.get_array_module(x)
+        y = xp.tanh(x)
         return y
 
     def backward(self, gy):
-        y = self.outputs[0]()
+        y = self.outputs[0]() # weakref
         gx = gy * (1 - y * y)
         return gx
 
@@ -161,22 +164,29 @@ class GetItem(Function):
         return f(gy)
 
 
-def get_item(x, slices):
-    return GetItem(slices)(x)
-
-
 class GetItemGrad(Function):
     def __init__(self, slices, in_shape):
         self.slices = slices
         self.in_shape = in_shape
     
     def forward(self, gy):
-        gx = np.zeros(self.in_shape)
+        xp = myPackage.cuda.get_array_module(gy)
+        gx = xp.zeros(self.in_shape)
         np.add.at(gx, self.slices, gy)
+
+        if xp is np:
+            np.add.at(gx, self.slices, gy)
+        else:
+            xp.scatter_add(gx, self.slices, gy)
+
         return gx
 
     def backward(self, ggx):
         return get_item(ggx, self.slices)
+
+
+def get_item(x, slices):
+    return GetItem(slices)(x)
 
 
 # =============================================================================
