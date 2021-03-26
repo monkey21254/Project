@@ -102,6 +102,9 @@ public class PlantTreeBtn : MonoBehaviour
     public static List<GameObject> obj_box_list = new List<GameObject>(); // 리스트 생성
     */
 
+    // Rotate
+    public float mX = 0, mZ = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -140,7 +143,11 @@ public class PlantTreeBtn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //mX += Time.deltaTime * 20.0f;
+        //transform.rotation = Quaternion.Euler(mX, 0, 0);
 
+        mX += .005f;
+        transform.Rotate(new Vector3(mX, 0, 0));
     }
     
     void OnMouseDown()
@@ -194,6 +201,13 @@ public class PlantTreeBtn : MonoBehaviour
     void OnMouseUp()
     {
         //Debug.Log("PlantTreeBtn_OnMouseUp");
+    }
+
+    private void OnMouseDrag()
+    {
+        //Debug.Log("OnMouseDrag in TreeBoxBtn");
+        mZ = 5.0f;
+        transform.Rotate(new Vector3(0, 0, mZ));
     }
 
     void OnDestroy()
