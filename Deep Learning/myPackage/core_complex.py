@@ -87,6 +87,8 @@ class Variable:
     transpose : Variable 인스턴스에서 transpose 메서드를 호출했을 때, myPackage.functions에서 transpose 함수를 바로 호출할 수 있도록 설정
     T : transpose를 바로 실행할 수 있도록 만든 @property function. @property 데코레이터를 사용하여 self 객체를 instance 변수로 바로 사용할 수 있도록 설정하였음
     sum : myPackage.functions.sum 함수를 호출하여 Variable 인스턴스에서 바로 sum 함수를 호출할 수 있도록 설정
+    >> Update
+        to_gpu & to_cpu: Variable 데이터를 GPU or CPU로 전송해주는 기능을 수행하는 메서드
     """
     def __init__(self, data, name = None):
         if data is not None:
@@ -183,6 +185,14 @@ class Variable:
             if not retain_grad:
                 for y in f.outputs:
                     y().grad = None
+
+    def to_cpu(self):
+        if self.data is not None:
+            self.data = myPackage.cuda.as_numpy(self.data)
+
+    def to_gpu(self):
+        if self.data is not None:
+            self.data = myPackage.cuda.as_cupy(self.data)
 
 
 # 타입 체크

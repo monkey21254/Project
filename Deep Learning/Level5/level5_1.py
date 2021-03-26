@@ -31,4 +31,3 @@ assert xp == np
 xp = cp.get_array_module(x)
 assert xp == cp
 
-

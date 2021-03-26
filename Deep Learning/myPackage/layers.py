@@ -29,6 +29,8 @@ class Layer:
     forward: It will be necessary method from derived class.
     params: Yield a layer instances value using iterator.
     cleargrad: Clear all value's gradient.
+    >> Update
+        to_gpu & to_cpu: Variable 데이터를 GPU or CPU로 전송해주는 기능을 수행하는 메서드
     """
     def __init__(self):
         self._params = set()
@@ -61,6 +63,14 @@ class Layer:
     def cleargrads(self):
         for param in self.params():
             param.cleargrad()
+
+    def to_cpu(self):
+        for param in self.params():
+            param.to_cpu()
+
+    def to_gpu(self):
+        for param in self.params():
+            param.to_gpu()
 
 
 class Linear(Layer):
