@@ -9,6 +9,7 @@ public class Text_Btn : MonoBehaviour
     {
         TextMesh tm = GetComponentInChildren<TextMesh>();
         tm.text = "Create Btn";
+        tm.transform.Translate(0, 1, 0);
     }
 
     // Update is called once per frame

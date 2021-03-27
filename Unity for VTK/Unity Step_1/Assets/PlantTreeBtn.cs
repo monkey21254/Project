@@ -148,7 +148,7 @@ public class PlantTreeBtn : MonoBehaviour
         //mX += Time.deltaTime * 20.0f;
         //transform.rotation = Quaternion.Euler(mX, 0, 0);
 
-        mX += .005f;
+        mX = .005f;
         transform.Rotate(new Vector3(mX, 0, 0));
     }
     
@@ -182,7 +182,7 @@ public class PlantTreeBtn : MonoBehaviour
         // ------------------------------- Cylinder Class
         try
         {
-            if ((Ctree.total_tree_count <= 5) == false)
+            if ((Ctree.total_tree_count <= 50) == false)
             {
                 throw new Exception("Out of Range error....");
             }
@@ -208,7 +208,7 @@ public class PlantTreeBtn : MonoBehaviour
     private void OnMouseDrag()
     {
         //Debug.Log("OnMouseDrag in TreeBoxBtn");
-        mZ = 5.0f;
+        mZ = 1.0f;
         transform.Rotate(new Vector3(0, 0, mZ));
     }
 

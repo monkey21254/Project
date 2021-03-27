@@ -14,7 +14,7 @@ public class Text_Cube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mY += .005f;
+        mY = .005f;
         transform.Rotate(new Vector3(0, mY, 0));
     }
 }

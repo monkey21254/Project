@@ -7,10 +7,10 @@ public class Camera_1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.Translate(0, 0, -30); // pair 1
+        transform.Translate(0, 0, -10); // pair 1
     }
 
-    public float mX = 0;
+    //public float mX = 0;
     // Update is called once per frame
     void Update()
     {

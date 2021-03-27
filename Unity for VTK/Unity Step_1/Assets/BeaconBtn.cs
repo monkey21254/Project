@@ -8,6 +8,7 @@ public class Students
 {
     static public string gText = "None";
     static public int total_student_count = 0; // 전체 나무 개수 카운트
+    static public int student_index = -1; // 학생 index 변수 & 초기값 -1.
 }
 
 
@@ -26,12 +27,12 @@ public class StudentsClass
 
     // 메소드
     private void getIndex() { ++StudentsClass.students_name; }
-    private void setPosition()
+    private void setPosition() // 생성자 단계에서 Vector 정보를 담고 있음.
     {
         for_count = (Students.total_student_count - 1) * 2;
         
-        vector_init.x = for_count - 30;
-        vector_init.y = 3;
+        vector_init.x = for_count - 25;
+        vector_init.y = 1.5f;
         vector_init.z = -20;
 
         this.student_box.transform.position = vector_init;
