@@ -23,7 +23,6 @@ public class StudentsClass
     private float for_count; // 위치 계산
     private Vector3 vector_init = new Vector3(0, 0, 0);
     public static List<Vector3> vector_list = new List<Vector3>(); // 벡터 정보
-    public static List<int> flag_list = new List<int>(); // Flag 정보
 
     // 메소드
     private void getIndex() { ++StudentsClass.students_name; }
@@ -37,7 +36,6 @@ public class StudentsClass
 
         this.student_box.transform.position = vector_init;
         vector_list.Add(vector_init);
-        flag_list.Add(0);
     }
 
     // 생성자
