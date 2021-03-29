@@ -6,9 +6,8 @@ using System;
 
 public class Students
 {
-    static public string gText = "None";
-    static public int total_student_count = 0; // 전체 학생 수 카운트
-    static public int student_index = -1; // 학생 index 변수 & 초기값 -1
+    public static int total_student_count = 0; // 전체 학생 수 카운트
+    public static int student_index = -1; // 학생 index 변수 & 초기값 -1
 }
 
 
@@ -20,21 +19,20 @@ public class StudentsClass
     
     public static int students_name = 0; // 이름 용도
 
-    private float for_count; // 위치 계산
-    public Vector3 vector_init = new Vector3(0, 0, 0);
+    // 초기 생성자
+    private float for_count = (Students.total_student_count - 1) * 2; // 위치 계산용
+    public Vector3 vector_init = new Vector3(0, 0, 0); // 학생 초기 위치
     public static List<Vector3> vector_list = new List<Vector3>(); // 시작점이 저장된 벡터3 리스트
 
 
     // 메소드
     public void getIndex() { ++StudentsClass.students_name; }
-    private void setPosition() // 생성자 단계에서 Vector 정보를 담고 있음.
-    {
-        for_count = (Students.total_student_count - 1) * 2;
-        
+    private void setPosition()
+    {        
         vector_init.x = for_count - 25;
         vector_init.y = 1.5f;
         vector_init.z = -20;
-        
+
         this.student_box.transform.position = vector_init;
     }
 
@@ -91,7 +89,7 @@ public class BeaconBtn : MonoBehaviour
             Debug.LogError(e);
         }
 
-        Debug.Log(StudentsClass.students_name);
+        //Debug.Log(StudentsClass.students_name);
     }
 
     private void OnMouseUp()

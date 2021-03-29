@@ -139,7 +139,7 @@ public class PlantTreeBtn : MonoBehaviour
         custom_cylinder = new CylinderClass((GameObject)Resources.Load("Prefabs/TreeGroup"));
         cylinder_list.Add(custom_cylinder);
 
-        Debug.Log(CylinderClass.cylinder_name);
+        //Debug.Log(CylinderClass.cylinder_name);
     }
     
     // Update is called once per frame

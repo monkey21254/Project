@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DeskScript : MonoBehaviour
 {
-    public static bool student_exist = false;
+    public bool student_exist = false;
+    public DeskScript2 another_desk;
+    public List<Vector3> vec3_desk1_list = new List<Vector3>();
 
-    private int this_obj_index; // 이번 단계 object index
+    public static bool flag1 = false;
+
     public static bool move_student_flag = false;
-
-    // 출발, 중간, 끝지점의 꼭지점좌표를 가지는 리스트
-    public List<Vector3> vector3s = new List<Vector3>();
-    private Vector3 middle_point1 = new Vector3(-30, 0, -10);
-
+    private int this_obj_index; // 이번 단계 object index
 
     private bool flag_to_go, flag_to_back; // 출첵 및 퇴첵 플래그
-    private int cnt = 1; // 중간지점 인덱스용
-
-    private Vector3 dest_point;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log(gameObject.transform.position);
+        another_desk = FindObjectOfType<DeskScript2>();
     }
 
     // Update is called once per frame
@@ -34,25 +31,27 @@ public class DeskScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        //this_obj_index = Desks_Base.desk_list.FindIndex(x => x.desk_box == gameObject);
-
         if (Student_script.select_flag == true)
         {
-            Get_data_for_move_and_set(vector3s);
-            foreach(Vector3 element in vector3s)
-            {
-                Debug.Log(element);
-            }
+            DeskScript.flag1 = true;
+            
+            DeskClass.from_start_to_middle();
+            vector3_save(transform.position.z);
+
+            DeskClass.vec3_desk_sumlist.AddRange(vec3_desk1_list);
+
+            //foreach(Vector3 element in DeskClass.vec3_desk_sumlist)
+            //{
+            //   Debug.Log(element);
+            //}
+
+            //BeaconBtn.students_list[Students.student_index]
         }
 
-        /*
-        if ((BeaconBtn.student_move_list[0] != null) && (Student_script.select_flag == true))
-        {
-            Debug.Log(BeaconBtn.student_move_list[0].student_box.transform.position);
-            Debug.Log(gameObject.transform.position);
-            //Get_data_for_move_and_set();
-        }
-        */
+
+
+
+
 
             /*else if (DeskScript.move_student_flag == true)
             {
@@ -80,17 +79,21 @@ public class DeskScript : MonoBehaviour
     }
 
 
-    // save_root: Vector3 List, angle_list: string List
-    void Get_data_for_move_and_set(List<Vector3> _vector3s) // 몇 번째 리스트 인덱스를 사용할 것인지 // int index, 
+    void vector3_save(float flag)
     {
-        _vector3s.Add(BeaconBtn.students_list[Student_script.selected_index].student_box.transform.position);
-        _vector3s.Insert(cnt, _vector3s[0] + new Vector3(0, 0, 2));
-        ++cnt;
-        _vector3s.Insert(cnt, new Vector3(middle_point1.x, _vector3s[cnt - 1].y, _vector3s[cnt - 1].z));
-        ++cnt;
-        _vector3s.Insert(cnt, middle_point1);
-        ++cnt;
-        _vector3s.Insert(_vector3s.Count, gameObject.transform.position);
+        if (vec3_desk1_list.Count >= 1) { vec3_desk1_list.Clear(); }
+        student_exist = true;
+        if (flag < 0)
+        {
+            vec3_desk1_list.Add(new Vector3(transform.position.x + 4, DeskClass.middle_point1.y, DeskClass.middle_point1.z));
+            vec3_desk1_list.Add(new Vector3(transform.position.x + 4, DeskClass.middle_point1.y, transform.position.z));
+        }
+        else if (flag > 0)
+        {
+            vec3_desk1_list.Add(DeskClass.middle_point1);
+            vec3_desk1_list.Add(DeskClass.middle_point2);
+            vec3_desk1_list.Add(new Vector3(transform.position.x + 4, DeskClass.middle_point2.y, DeskClass.middle_point2.z));
+            vec3_desk1_list.Add(new Vector3(transform.position.x + 4, DeskClass.middle_point2.y, transform.position.z));
+        }
     }
-
 }
