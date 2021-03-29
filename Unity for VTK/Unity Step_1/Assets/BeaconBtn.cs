@@ -7,8 +7,8 @@ using System;
 public class Students
 {
     static public string gText = "None";
-    static public int total_student_count = 0; // 전체 나무 개수 카운트
-    static public int student_index = -1; // 학생 index 변수 & 초기값 -1.
+    static public int total_student_count = 0; // 전체 학생 수 카운트
+    static public int student_index = -1; // 학생 index 변수 & 초기값 -1
 }
 
 
@@ -21,11 +21,12 @@ public class StudentsClass
     public static int students_name = 0; // 이름 용도
 
     private float for_count; // 위치 계산
-    private Vector3 vector_init = new Vector3(0, 0, 0);
-    public static List<Vector3> vector_list = new List<Vector3>(); // 벡터 정보
+    public Vector3 vector_init = new Vector3(0, 0, 0);
+    public static List<Vector3> vector_list = new List<Vector3>(); // 시작점이 저장된 벡터3 리스트
+
 
     // 메소드
-    private void getIndex() { ++StudentsClass.students_name; }
+    public void getIndex() { ++StudentsClass.students_name; }
     private void setPosition() // 생성자 단계에서 Vector 정보를 담고 있음.
     {
         for_count = (Students.total_student_count - 1) * 2;
@@ -33,9 +34,8 @@ public class StudentsClass
         vector_init.x = for_count - 25;
         vector_init.y = 1.5f;
         vector_init.z = -20;
-
+        
         this.student_box.transform.position = vector_init;
-        vector_list.Add(vector_init);
     }
 
     // 생성자
@@ -52,9 +52,10 @@ public class StudentsClass
 
 public class BeaconBtn : MonoBehaviour
 {
-
     public StudentsClass custom_students;
-    public static List<StudentsClass> students_list = new List<StudentsClass>();
+    public static List<StudentsClass> students_list = new List<StudentsClass>(); // 출석용
+    public static List<StudentsClass> student_move_list = new List<StudentsClass>(); // 퇴근용
+
     // Start is called before the first frame update
     void Start()
     {

@@ -7,21 +7,28 @@ using System.Linq;
 public class Student_script : MonoBehaviour
 {
     private int this_obj_index; // 이번 단계 object index
-    private bool flag_to_go, flag_to_back; // 출첵 및 퇴첵 플래그
-    public static bool warning_flag = false;
+    public static int selected_index; // 최종 결정된 object index (다른 클래스에서 활용되어야 함)
 
-    private float total_dis; // 출발지와 도착지 간의 거리 총합
-    private Vector3 total_dis_vector = new Vector3(); // 출발지와 도착지 간의 상대 벡터
-    private float x, y, z; // x, y, z 축에 대한 거리(절대값)
-    private Vector3 start_points = new Vector3(); // 시작 Vector
+    private bool flag_to_go, flag_to_back; // 출첵 및 퇴첵 플래그
+    public static bool select_flag = false; 
+    //public static bool warning_flag = false; 
+    
+    
+    
+    //public static List<List<Vector3> > vectors = new List<List<Vector3> >();
+
+
     private int[,] plane_info; // 평면 정보
     private float mX, mY, mZ; // 거리 계산용 변수
-    public Vector3 temp;
+    private Vector3 temp; // 이동 검증용
+    
+    private List<string> angle_list = new List<string>(); // 회전형태 저장용
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,11 +36,23 @@ public class Student_script : MonoBehaviour
     {
         if (flag_to_go == true)
         {
+            /* 필요 */
+            // Student_script.warning_flag = true;
+            // 업데이트 시 StudentClass
+            
+
+
+
+
+            /*
             if(mX < x)
             {
                 mX += Time.deltaTime * 5.0f;
+
                 transform.position = new Vector3(start_points.x - mX, start_points.y, start_points.z);
                 transform.rotation = Quaternion.Euler(0, 180, 0); // 0, 180, 0 : Vector3
+
+                temp = transform.rotation.eulerAngles;
                 //Debug.Log(transform.rotation.eulerAngles);
             }
             else if (mX >= x & mZ < z)
@@ -41,52 +60,77 @@ public class Student_script : MonoBehaviour
                 mZ += Time.deltaTime * 5.0f;
                 transform.position = new Vector3(start_points.x - mX, start_points.y, start_points.z + mZ);
                 transform.rotation = Quaternion.Euler(0, -90, 0); // 0, 270, 0 : Vector3
+
+                if (temp != transform.rotation.eulerAngles)
+                {
+                    //Debug.Log(transform.rotation.eulerAngles);
+                    //Debug.Log(transform.rotation.eulerAngles.y - temp.y);
+                    if (transform.rotation.eulerAngles.y - temp.y == 90 || transform.rotation.eulerAngles.y - temp.y == -270)
+                    {
+                        angle_list.Add("right");
+                    }
+                    else if (transform.rotation.eulerAngles.y - temp.y == 180 || transform.rotation.eulerAngles.y - temp.y == -180)
+                    {
+                        angle_list.Add("backward");
+                    }
+                    else if (transform.rotation.eulerAngles.y - temp.y == -90 || transform.rotation.eulerAngles.y - temp.y == 270)
+                    {
+                        angle_list.Add("left");
+                    }
+                }
+                temp = transform.rotation.eulerAngles;
                 //Debug.Log(transform.rotation.eulerAngles);
             }
             else
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0); // 0, 0, 0 : Vector3
                 flag_to_go = false;
-                Student_script.warning_flag = false;
+                Student_script.warning_flag = false; // 진행 중에는 다른 개체를 클릭할 수 없도록 지정
                 Students.student_index = -1; // 초기화
+
+                if (temp != transform.rotation.eulerAngles)
+                {
+                    //Debug.Log(transform.rotation.eulerAngles);
+                    //Debug.Log(transform.rotation.eulerAngles.y - temp.y);
+                    if (transform.rotation.eulerAngles.y - temp.y == 90 || transform.rotation.eulerAngles.y - temp.y == -270)
+                    {
+                        angle_list.Add("right");
+                    }
+                    else if (transform.rotation.eulerAngles.y - temp.y == 180 || transform.rotation.eulerAngles.y - temp.y == -180)
+                    {
+                        angle_list.Add("backward");
+                    }
+                    else if (transform.rotation.eulerAngles.y - temp.y == -90 || transform.rotation.eulerAngles.y - temp.y == 270)
+                    {
+                        angle_list.Add("left");
+                    }
+                }
+                totalStuVecList.Add(angle_list); // 인덱스 호출할 방법 생각해야 함
+
+                temp = transform.rotation.eulerAngles;
                 //Debug.Log(transform.rotation.eulerAngles);
-
             }
-
+            */
         }
         
     }
 
     void OnMouseDown()
     {      
-        if (Student_script.warning_flag == false)
+        this_obj_index = BeaconBtn.students_list.FindIndex(x => x.student_box == gameObject);
+        if (Students.student_index != this_obj_index) // 한 학생이 지정되었다가 모든 행위가 진행된 이후에 또 똑같은 인덱스에서 클릭하는 경우 오류 생길 수 있으므로 그에 대한 처리가 필요
         {
-            this_obj_index = BeaconBtn.students_list.FindIndex(x => x.student_box == gameObject);
-            if (Students.student_index != this_obj_index) 
+            
+            BeaconBtn.students_list[this_obj_index].student_box.transform.Translate(0, 3, 0);
+            if (Students.student_index != -1)
             {
-                BeaconBtn.students_list[this_obj_index].student_box.transform.Translate(0, 3, 0);
-                if (Students.student_index != -1)
-                {
-                    BeaconBtn.students_list[Students.student_index].student_box.transform.Translate(0, -3, 0);
-                }
-                Students.student_index = this_obj_index;
+                BeaconBtn.students_list[Students.student_index].student_box.transform.Translate(0, -3, 0);
             }
-            else
-            {
-                // 이동 시작 : Move(출발지점, 도착지점) & new Vector3(-30, 3, -10) Middle Point.
-                Get_data_for_move_and_set(StudentsClass.vector_list[Students.student_index], new Vector3(-30, 3, -10));
+            Students.student_index = this_obj_index;
 
-                --Students.total_student_count;
-                StudentsClass.vector_list.RemoveAt(Students.total_student_count);
-                BeaconBtn.students_list.RemoveAt(this_obj_index);
-                flag_to_go = true;
-                Student_script.warning_flag = true;
+            Student_script.selected_index = this_obj_index; // 지우고 this_obj_index를 static으로 두어도 될지 안될지를 나중에 다시 고민해야 함.
 
-                foreach (var it in BeaconBtn.students_list.Select((Value, Index) => new { Value, Index }))
-                {
-                    it.Value.student_box.transform.position = StudentsClass.vector_list[it.Index];
-                }
-            }
+            Student_script.select_flag = true;
         }
     }
 
@@ -95,28 +139,4 @@ public class Student_script : MonoBehaviour
     {
 
     }
-
-
-    void Get_data_for_move_and_set(Vector3 start_point, Vector3 end_point)
-    {
-        // 초기 설정
-        start_points = gameObject.transform.position = start_point + new Vector3(0, 0, 2);
-        //Debug.Log(start_points);
-
-        // 거리 계산
-        total_dis_vector.x = gameObject.transform.position.x - end_point.x;
-        total_dis_vector.y = gameObject.transform.position.y - end_point.y;
-        total_dis_vector.z = gameObject.transform.position.z - end_point.z;
-        //Debug.Log(total_dis_vector);
-        //Debug.Log(Mathf.Abs(total_dis_vector.x) + Mathf.Abs(total_dis_vector.y) + Mathf.Abs(total_dis_vector.z));
-
-        // 평면 초기화
-        x = Mathf.Abs(total_dis_vector.x);
-        y = Mathf.Abs(total_dis_vector.y);
-        z = Mathf.Abs(total_dis_vector.z);
-        total_dis = x + y + z;
-        //Debug.Log(first_plane[Mathf.RoundToInt(x) - 1, Mathf.RoundToInt(z) - 1]);
-        
-    }
-
 }
