@@ -75,6 +75,7 @@ public class Student_script : MonoBehaviour
                         DeskScript2.flag2 = false;
                     }
                     flag_to_back = true;
+                    //Students.student_index = -1;
                 }
             }
             else if (index < this_student_list.Count - 1)
@@ -91,6 +92,7 @@ public class Student_script : MonoBehaviour
                 {
                     index = 0;
                     flag_to_bus = false;
+                    //Students.student_index = -1;
                 }
             }
             else if (index >= 0)
